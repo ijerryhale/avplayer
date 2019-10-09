@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "1100"
+   version = "1.7">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "exec &gt; ${PROJECT_DIR}/prebuild.log 2&gt;&amp;1&#10;&#10;PLIST=$PROJECT_DIR/$INFOPLIST_FILE&#10;&#10;#   get CFBundleShortVersionString&#10;CFBUNDLESHORTVERSSTR=$(/usr/libexec/PlistBuddy -c &quot;Print CFBundleShortVersionString&quot; $PLIST)&#10;&#10;#   increment CFBundleVersion&#10;CFBUNDLEVERSION=$(/usr/libexec/PlistBuddy -c &quot;Print CFBundleVersion&quot; $PLIST)&#10;CFBUNDLEVERSION=$(($CFBUNDLEVERSION + 1))&#10;&#10;#   save new CFBundleVersion&#10;/usr/libexec/PlistBuddy -c &quot;Set :CFBundleVersion $CFBUNDLEVERSION&quot; $PLIST&#10;&#10;TAGVERSION=${CFBUNDLESHORTVERSSTR//./_}&#10;&#10;#   create a buildTag&#10;&#10;#   reserve top nibble for ... whatever, this&#10;#   means 4095 max CFBundleVersion build number&#10;RESERVEDHEX=&quot;0&quot;&#10;HEX_CFBUNDLEVERS=$(printf &quot;%03X&quot; $CFBUNDLEVERSION)&#10;&#10;BUILDTAG=$1$TAGVERSION&quot;_&quot;$RESERVEDHEX$HEX_CFBUNDLEVERS&#10;&#10;#   save BUILDTAG&#10;/usr/libexec/PlistBuddy -c &quot;Set :BUILD_TAG $BUILDTAG&quot; $PLIST&#10;&#10;echo &quot;CFBundleShortVersionString: &quot; $CFBUNDLESHORTVERSSTR&#10;echo &quot;CFBundleVersion: &quot; $CFBUNDLEVERSION&#10;&#10;echo &quot;HEX_CFBUNDLEVERS: &quot; $HEX_CFBUNDLEVERS&#10;echo &quot;BUILDTAG: &quot; $BUILDTAG&#10;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "71FB5B491C16C64200C9E45D"
+                     BuildableName = "avplayer.app"
+                     BlueprintName = "avplayer"
+                     ReferencedContainer = "container:avplayer.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "71FB5B491C16C64200C9E45D"
+               BuildableName = "avplayer.app"
+               BlueprintName = "avplayer"
+               ReferencedContainer = "container:avplayer.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "71FB5B491C16C64200C9E45D"
+            BuildableName = "avplayer.app"
+            BlueprintName = "avplayer"
+            ReferencedContainer = "container:avplayer.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "71FB5B5A1C16C64200C9E45D"
+               BuildableName = "avplayerTests.xctest"
+               BlueprintName = "avplayerTests"
+               ReferencedContainer = "container:avplayer.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "71FB5B651C16C64200C9E45D"
+               BuildableName = "avplayerUITests.xctest"
+               BlueprintName = "avplayerUITests"
+               ReferencedContainer = "container:avplayer.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "71FB5B491C16C64200C9E45D"
+            BuildableName = "avplayer.app"
+            BlueprintName = "avplayer"
+            ReferencedContainer = "container:avplayer.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "71FB5B491C16C64200C9E45D"
+            BuildableName = "avplayer.app"
+            BlueprintName = "avplayer"
+            ReferencedContainer = "container:avplayer.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>

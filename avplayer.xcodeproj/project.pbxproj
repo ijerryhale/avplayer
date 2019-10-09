@@ -1,0 +1,611 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2C0A67D7232C3FAC00BC5270 /* PlayerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0A67D6232C3FAC00BC5270 /* PlayerWindowController.swift */; };
+		2C440059234D0D0000DC8E14 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2C440058234D0D0000DC8E14 /* README.md */; };
+		2C4C5900233FFBAA0069BCA3 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4C58FF233FFBAA0069BCA3 /* PlayerViewController.swift */; };
+		2C4C5903233FFCF60069BCA3 /* OpenURLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4C5901233FFCF60069BCA3 /* OpenURLViewController.swift */; };
+		2C4C5904233FFCF60069BCA3 /* OpenURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4C5902233FFCF60069BCA3 /* OpenURLView.swift */; };
+		2C7F65BD233D215900EC6415 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F65BC233D215800EC6415 /* PlayerView.swift */; };
+		2C7F65FC233D5FF500EC6415 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B4D1C16C64200C9E45D /* AppDelegate.swift */; };
+		2C98B0CB2336EEFF005042B2 /* PlayerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98B0CA2336EEFF005042B2 /* PlayerWindow.swift */; };
+		2C9B511C234BE84E00EBF905 /* Tracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9B511A234BE84E00EBF905 /* Tracker.m */; };
+		2C9B511D234BE84E00EBF905 /* Slider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9B511B234BE84E00EBF905 /* Slider.m */; };
+		2CAD48932342A8B9002ED2F8 /* Marker in Resources */ = {isa = PBXBuildFile; fileRef = 2CAD48922342A8B9002ED2F8 /* Marker */; };
+		2CB8676223426955004B5B77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CB8676023426955004B5B77 /* Main.storyboard */; };
+		71FB5B521C16C64200C9E45D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71FB5B511C16C64200C9E45D /* Assets.xcassets */; };
+		71FB5B601C16C64200C9E45D /* avplayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B5F1C16C64200C9E45D /* avplayerTests.swift */; };
+		71FB5B6B1C16C64200C9E45D /* avplayerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B6A1C16C64200C9E45D /* avplayerUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		71FB5B5C1C16C64200C9E45D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71FB5B421C16C64200C9E45D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 71FB5B491C16C64200C9E45D;
+			remoteInfo = OSXDemo;
+		};
+		71FB5B671C16C64200C9E45D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71FB5B421C16C64200C9E45D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 71FB5B491C16C64200C9E45D;
+			remoteInfo = OSXDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2C0A67D6232C3FAC00BC5270 /* PlayerWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerWindowController.swift; sourceTree = "<group>"; };
+		2C440058234D0D0000DC8E14 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2C4C58FF233FFBAA0069BCA3 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		2C4C5901233FFCF60069BCA3 /* OpenURLViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenURLViewController.swift; sourceTree = "<group>"; };
+		2C4C5902233FFCF60069BCA3 /* OpenURLView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenURLView.swift; sourceTree = "<group>"; };
+		2C7F65BC233D215800EC6415 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		2C98B0CA2336EEFF005042B2 /* PlayerWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerWindow.swift; sourceTree = "<group>"; };
+		2C9B5118234BE84E00EBF905 /* Slider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Slider.h; path = "Objective-C/Slider.h"; sourceTree = "<group>"; };
+		2C9B5119234BE84E00EBF905 /* Tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tracker.h; path = "Objective-C/Tracker.h"; sourceTree = "<group>"; };
+		2C9B511A234BE84E00EBF905 /* Tracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tracker.m; path = "Objective-C/Tracker.m"; sourceTree = "<group>"; };
+		2C9B511B234BE84E00EBF905 /* Slider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Slider.m; path = "Objective-C/Slider.m"; sourceTree = "<group>"; };
+		2CA88FC9232C36DE0078CB20 /* avplayer_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = avplayer_Prefix.pch; path = avplayer/avplayer_Prefix.pch; sourceTree = "<group>"; };
+		2CAD48922342A8B9002ED2F8 /* Marker */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Marker; sourceTree = "<group>"; };
+		2CB8676123426955004B5B77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = avplayer/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2CBEB66E233AE68C007A731D /* avplayer-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "avplayer-Bridging-Header.h"; path = "avplayer/avplayer-Bridging-Header.h"; sourceTree = "<group>"; };
+		71FB5B4A1C16C64200C9E45D /* avplayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = avplayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		71FB5B4D1C16C64200C9E45D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		71FB5B511C16C64200C9E45D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		71FB5B561C16C64200C9E45D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		71FB5B5B1C16C64200C9E45D /* avplayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = avplayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		71FB5B5F1C16C64200C9E45D /* avplayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = avplayerTests.swift; sourceTree = "<group>"; };
+		71FB5B611C16C64200C9E45D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		71FB5B661C16C64200C9E45D /* avplayerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = avplayerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		71FB5B6A1C16C64200C9E45D /* avplayerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = avplayerUITests.swift; sourceTree = "<group>"; };
+		71FB5B6C1C16C64200C9E45D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		71FB5B471C16C64200C9E45D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		71FB5B581C16C64200C9E45D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		71FB5B631C16C64200C9E45D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2CF4955B2342A0DF00726471 /* Objective-C */ = {
+			isa = PBXGroup;
+			children = (
+				2C9B5118234BE84E00EBF905 /* Slider.h */,
+				2C9B511B234BE84E00EBF905 /* Slider.m */,
+				2C9B5119234BE84E00EBF905 /* Tracker.h */,
+				2C9B511A234BE84E00EBF905 /* Tracker.m */,
+			);
+			name = "Objective-C";
+			sourceTree = "<group>";
+		};
+		71FB5B411C16C64200C9E45D = {
+			isa = PBXGroup;
+			children = (
+				2C440058234D0D0000DC8E14 /* README.md */,
+				2CBEB66E233AE68C007A731D /* avplayer-Bridging-Header.h */,
+				2CA88FC9232C36DE0078CB20 /* avplayer_Prefix.pch */,
+				71FB5B4C1C16C64200C9E45D /* avplayer */,
+				71FB5B5E1C16C64200C9E45D /* avplayerTests */,
+				71FB5B691C16C64200C9E45D /* avplayerUITests */,
+				71FB5B4B1C16C64200C9E45D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		71FB5B4B1C16C64200C9E45D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				71FB5B4A1C16C64200C9E45D /* avplayer.app */,
+				71FB5B5B1C16C64200C9E45D /* avplayerTests.xctest */,
+				71FB5B661C16C64200C9E45D /* avplayerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		71FB5B4C1C16C64200C9E45D /* avplayer */ = {
+			isa = PBXGroup;
+			children = (
+				2CF4955B2342A0DF00726471 /* Objective-C */,
+				2C4C5902233FFCF60069BCA3 /* OpenURLView.swift */,
+				2C4C5901233FFCF60069BCA3 /* OpenURLViewController.swift */,
+				2C7F65BC233D215800EC6415 /* PlayerView.swift */,
+				2C4C58FF233FFBAA0069BCA3 /* PlayerViewController.swift */,
+				2C98B0CA2336EEFF005042B2 /* PlayerWindow.swift */,
+				2C0A67D6232C3FAC00BC5270 /* PlayerWindowController.swift */,
+				71FB5B4D1C16C64200C9E45D /* AppDelegate.swift */,
+				71FB5B511C16C64200C9E45D /* Assets.xcassets */,
+				2CB8676023426955004B5B77 /* Main.storyboard */,
+				71FB5B561C16C64200C9E45D /* Info.plist */,
+				2CAD48922342A8B9002ED2F8 /* Marker */,
+			);
+			path = avplayer;
+			sourceTree = "<group>";
+		};
+		71FB5B5E1C16C64200C9E45D /* avplayerTests */ = {
+			isa = PBXGroup;
+			children = (
+				71FB5B5F1C16C64200C9E45D /* avplayerTests.swift */,
+				71FB5B611C16C64200C9E45D /* Info.plist */,
+			);
+			path = avplayerTests;
+			sourceTree = "<group>";
+		};
+		71FB5B691C16C64200C9E45D /* avplayerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				71FB5B6A1C16C64200C9E45D /* avplayerUITests.swift */,
+				71FB5B6C1C16C64200C9E45D /* Info.plist */,
+			);
+			path = avplayerUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		71FB5B491C16C64200C9E45D /* avplayer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 71FB5B6F1C16C64200C9E45D /* Build configuration list for PBXNativeTarget "avplayer" */;
+			buildPhases = (
+				71FB5B461C16C64200C9E45D /* Sources */,
+				71FB5B471C16C64200C9E45D /* Frameworks */,
+				71FB5B481C16C64200C9E45D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = avplayer;
+			productName = OSXDemo;
+			productReference = 71FB5B4A1C16C64200C9E45D /* avplayer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		71FB5B5A1C16C64200C9E45D /* avplayerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 71FB5B721C16C64200C9E45D /* Build configuration list for PBXNativeTarget "avplayerTests" */;
+			buildPhases = (
+				71FB5B571C16C64200C9E45D /* Sources */,
+				71FB5B581C16C64200C9E45D /* Frameworks */,
+				71FB5B591C16C64200C9E45D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				71FB5B5D1C16C64200C9E45D /* PBXTargetDependency */,
+			);
+			name = avplayerTests;
+			productName = OSXDemoTests;
+			productReference = 71FB5B5B1C16C64200C9E45D /* avplayerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		71FB5B651C16C64200C9E45D /* avplayerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 71FB5B751C16C64200C9E45D /* Build configuration list for PBXNativeTarget "avplayerUITests" */;
+			buildPhases = (
+				71FB5B621C16C64200C9E45D /* Sources */,
+				71FB5B631C16C64200C9E45D /* Frameworks */,
+				71FB5B641C16C64200C9E45D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				71FB5B681C16C64200C9E45D /* PBXTargetDependency */,
+			);
+			name = avplayerUITests;
+			productName = OSXDemoUITests;
+			productReference = 71FB5B661C16C64200C9E45D /* avplayerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		71FB5B421C16C64200C9E45D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 1100;
+				ORGANIZATIONNAME = jhale;
+				TargetAttributes = {
+					71FB5B491C16C64200C9E45D = {
+						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = CZ3N3VN6HQ;
+						LastSwiftMigration = 1030;
+						ProvisioningStyle = Automatic;
+					};
+					71FB5B5A1C16C64200C9E45D = {
+						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 1030;
+						TestTargetID = 71FB5B491C16C64200C9E45D;
+					};
+					71FB5B651C16C64200C9E45D = {
+						CreatedOnToolsVersion = 7.1.1;
+						LastSwiftMigration = 1030;
+						TestTargetID = 71FB5B491C16C64200C9E45D;
+					};
+				};
+			};
+			buildConfigurationList = 71FB5B451C16C64200C9E45D /* Build configuration list for PBXProject "avplayer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 71FB5B411C16C64200C9E45D;
+			productRefGroup = 71FB5B4B1C16C64200C9E45D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				71FB5B491C16C64200C9E45D /* avplayer */,
+				71FB5B5A1C16C64200C9E45D /* avplayerTests */,
+				71FB5B651C16C64200C9E45D /* avplayerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		71FB5B481C16C64200C9E45D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2CAD48932342A8B9002ED2F8 /* Marker in Resources */,
+				71FB5B521C16C64200C9E45D /* Assets.xcassets in Resources */,
+				2C440059234D0D0000DC8E14 /* README.md in Resources */,
+				2CB8676223426955004B5B77 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		71FB5B591C16C64200C9E45D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		71FB5B641C16C64200C9E45D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		71FB5B461C16C64200C9E45D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C9B511C234BE84E00EBF905 /* Tracker.m in Sources */,
+				2C98B0CB2336EEFF005042B2 /* PlayerWindow.swift in Sources */,
+				2C7F65BD233D215900EC6415 /* PlayerView.swift in Sources */,
+				2C7F65FC233D5FF500EC6415 /* AppDelegate.swift in Sources */,
+				2C4C5903233FFCF60069BCA3 /* OpenURLViewController.swift in Sources */,
+				2C0A67D7232C3FAC00BC5270 /* PlayerWindowController.swift in Sources */,
+				2C4C5904233FFCF60069BCA3 /* OpenURLView.swift in Sources */,
+				2C9B511D234BE84E00EBF905 /* Slider.m in Sources */,
+				2C4C5900233FFBAA0069BCA3 /* PlayerViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		71FB5B571C16C64200C9E45D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71FB5B601C16C64200C9E45D /* avplayerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		71FB5B621C16C64200C9E45D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71FB5B6B1C16C64200C9E45D /* avplayerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		71FB5B5D1C16C64200C9E45D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 71FB5B491C16C64200C9E45D /* avplayer */;
+			targetProxy = 71FB5B5C1C16C64200C9E45D /* PBXContainerItemProxy */;
+		};
+		71FB5B681C16C64200C9E45D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 71FB5B491C16C64200C9E45D /* avplayer */;
+			targetProxy = 71FB5B671C16C64200C9E45D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2CB8676023426955004B5B77 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2CB8676123426955004B5B77 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		71FB5B6D1C16C64200C9E45D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+				SYMROOT = build;
+			};
+			name = Debug;
+		};
+		71FB5B6E1C16C64200C9E45D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				SYMROOT = build;
+			};
+			name = Release;
+		};
+		71FB5B701C16C64200C9E45D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = CZ3N3VN6HQ;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = avplayer/avplayer_Prefix.pch;
+				INFOPLIST_FILE = avplayer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jhale.avplayer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/jhale/Desktop/git_project/avplayer/avplayer/avplayer-Bridging-Header.h";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				SYMROOT = build;
+			};
+			name = Debug;
+		};
+		71FB5B711C16C64200C9E45D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = CZ3N3VN6HQ;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = avplayer/avplayer_Prefix.pch;
+				INFOPLIST_FILE = avplayer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jhale.avplayer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/jhale/Desktop/git_project/avplayer/avplayer/avplayer-Bridging-Header.h";
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				SYMROOT = build;
+			};
+			name = Release;
+		};
+		71FB5B731C16C64200C9E45D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = avplayerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jhale.avplayer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/avplayer.app/Contents/MacOS/avplayer";
+			};
+			name = Debug;
+		};
+		71FB5B741C16C64200C9E45D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = avplayerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jhale.avplayer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/avplayer.app/Contents/MacOS/avplayer";
+			};
+			name = Release;
+		};
+		71FB5B761C16C64200C9E45D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = avplayerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jhale.avplayerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = avplayer;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		71FB5B771C16C64200C9E45D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = avplayerUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jhale.avplayerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = avplayer;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		71FB5B451C16C64200C9E45D /* Build configuration list for PBXProject "avplayer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71FB5B6D1C16C64200C9E45D /* Debug */,
+				71FB5B6E1C16C64200C9E45D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		71FB5B6F1C16C64200C9E45D /* Build configuration list for PBXNativeTarget "avplayer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71FB5B701C16C64200C9E45D /* Debug */,
+				71FB5B711C16C64200C9E45D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		71FB5B721C16C64200C9E45D /* Build configuration list for PBXNativeTarget "avplayerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71FB5B731C16C64200C9E45D /* Debug */,
+				71FB5B741C16C64200C9E45D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		71FB5B751C16C64200C9E45D /* Build configuration list for PBXNativeTarget "avplayerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				71FB5B761C16C64200C9E45D /* Debug */,
+				71FB5B771C16C64200C9E45D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 71FB5B421C16C64200C9E45D /* Project object */;
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[Slider observeValueForKeyPath:ofObject:change:context:]:Slider.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "*(long *)context">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
