@@ -5,12 +5,18 @@ Mac OS AVPlayer using AVPlayerLayer (Swift 5/Objective-C)
 As of October 9 avplayer implements:
 
 •   Opening of files thru Drag & Drop on the PlayerView
+<br>
 •   Opening remote Movie files with OpenURL...
+<br>
 •   Examples of both Key Value Observing and Key Value Coding
+<br>
 •   Using Objective-C Custom UI objects from Swift code
+<br>
 •   Full Screen Window support
 
-So, maybe not as simple as it started out to be. QuickTime Player Pro 7 stops working with Mac OS Catalina so we thought we'd have some fun.
+So, maybe not as simple as it started out to be.
+<br>
+QuickTime Player Pro 7 stops working with Mac OS Catalina so we thought we'd have some fun.
 
 
 ## Requirements
