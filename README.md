@@ -10,9 +10,7 @@ As of October 9 avplayer implements:
 •   Using Objective-C Custom UI objects from Swift code
 •   Full Screen Window support
 
-So, maybe not as simple as it started out to be.
-
-QuickTime Player Pro 7 stops working with Mac OS Catalina so we thought we'd have some fun.
+So, maybe not as simple as it started out to be. QuickTime Player Pro 7 stops working with Mac OS Catalina so we thought we'd have some fun.
 
 
 ## Requirements
