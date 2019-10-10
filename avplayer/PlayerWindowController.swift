@@ -290,14 +290,15 @@ class PlayerWindowController : NSWindowController
         let prefs = UserDefaults.standard.data(forKey: WINDOW_FRAME)
         
         if prefs == nil { window?.setFrame(NSMakeRect(FRAME_DEFAULT_X, FRAME_DEFAULT_Y, FRAME_DEFAULT_WIDTH, FRAME_DEFAULT_HGHT), display: true) }
-        
-        do {
-            if let frame = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(prefs!) as? NSRect
-            {
-                window?.setFrame(frame, display: true)
-            }
-        } catch { print("NSKeyedUnarchiver.unarchiveObject error") }
-        
+        else
+        {
+            do {
+                if let frame = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(prefs!) as? NSRect
+                {
+                    window?.setFrame(frame, display: true)
+                }
+            } catch { print("NSKeyedUnarchiver.unarchiveObject error") }
+        }
         //  full screen change notification
         //  NotificationCenter.default.addObserver(self, selector: #selector(willEnterFull),
         //      name: NSWindow.willEnterFullScreenNotification, object: nil)
