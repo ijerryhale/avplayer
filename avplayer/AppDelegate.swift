@@ -2,8 +2,8 @@
     PlayerViewController.swift
     avplayer
 
-    Created by Jerry Hale on 9/11/19.
-    Copyright © 2019 jhale. All rights reserved.
+    Created by Jerry Hale on 9/11/19
+    Copyright © 2019 jhale. All rights reserved
  
  This file is part of avplayer.
 
@@ -26,6 +26,14 @@ let NOTIF_TOGGLETIMECODEDISPLAY = "ToggleTimeCodeDisplay"
 let NOTIF_CREATE_TRIMMED_MOV = "CreateTrimmedMOV"
 
 import Cocoa
+
+extension Float
+{
+    func truncate(places : Int)-> Float
+    {
+        return Float(floor(pow(10.0, Float(places)) * self)/pow(10.0, Float(places)))
+    }
+}
 
 @NSApplicationMain
 class AppDelegate: NSObject

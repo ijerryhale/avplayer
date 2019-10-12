@@ -12,6 +12,9 @@
 		2C4C5900233FFBAA0069BCA3 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4C58FF233FFBAA0069BCA3 /* PlayerViewController.swift */; };
 		2C4C5903233FFCF60069BCA3 /* OpenURLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4C5901233FFCF60069BCA3 /* OpenURLViewController.swift */; };
 		2C4C5904233FFCF60069BCA3 /* OpenURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4C5902233FFCF60069BCA3 /* OpenURLView.swift */; };
+		2C6C1104234EAEF600565CA3 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6C1103234EAEF600565CA3 /* SplitViewController.swift */; };
+		2C6C1106234EB06E00565CA3 /* PropertyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6C1105234EB06E00565CA3 /* PropertyViewController.swift */; };
+		2C7652DD234E8E6B000E8248 /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7652DC234E8E6B000E8248 /* ColorView.swift */; };
 		2C7F65BD233D215900EC6415 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F65BC233D215800EC6415 /* PlayerView.swift */; };
 		2C7F65FC233D5FF500EC6415 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B4D1C16C64200C9E45D /* AppDelegate.swift */; };
 		2C98B0CB2336EEFF005042B2 /* PlayerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98B0CA2336EEFF005042B2 /* PlayerWindow.swift */; };
@@ -47,6 +50,9 @@
 		2C4C58FF233FFBAA0069BCA3 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		2C4C5901233FFCF60069BCA3 /* OpenURLViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenURLViewController.swift; sourceTree = "<group>"; };
 		2C4C5902233FFCF60069BCA3 /* OpenURLView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenURLView.swift; sourceTree = "<group>"; };
+		2C6C1103234EAEF600565CA3 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
+		2C6C1105234EB06E00565CA3 /* PropertyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyViewController.swift; sourceTree = "<group>"; };
+		2C7652DC234E8E6B000E8248 /* ColorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorView.swift; sourceTree = "<group>"; };
 		2C7F65BC233D215800EC6415 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		2C98B0CA2336EEFF005042B2 /* PlayerWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerWindow.swift; sourceTree = "<group>"; };
 		2C9B5118234BE84E00EBF905 /* Slider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Slider.h; path = "Objective-C/Slider.h"; sourceTree = "<group>"; };
@@ -133,10 +139,13 @@
 			children = (
 				2CF4955B2342A0DF00726471 /* Objective-C */,
 				2C4C5902233FFCF60069BCA3 /* OpenURLView.swift */,
-				2C4C5901233FFCF60069BCA3 /* OpenURLViewController.swift */,
+				2C7652DC234E8E6B000E8248 /* ColorView.swift */,
 				2C7F65BC233D215800EC6415 /* PlayerView.swift */,
-				2C4C58FF233FFBAA0069BCA3 /* PlayerViewController.swift */,
 				2C98B0CA2336EEFF005042B2 /* PlayerWindow.swift */,
+				2C4C5901233FFCF60069BCA3 /* OpenURLViewController.swift */,
+				2C6C1105234EB06E00565CA3 /* PropertyViewController.swift */,
+				2C6C1103234EAEF600565CA3 /* SplitViewController.swift */,
+				2C4C58FF233FFBAA0069BCA3 /* PlayerViewController.swift */,
 				2C0A67D6232C3FAC00BC5270 /* PlayerWindowController.swift */,
 				71FB5B4D1C16C64200C9E45D /* AppDelegate.swift */,
 				71FB5B511C16C64200C9E45D /* Assets.xcassets */,
@@ -302,10 +311,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C6C1106234EB06E00565CA3 /* PropertyViewController.swift in Sources */,
 				2C9B511C234BE84E00EBF905 /* Tracker.m in Sources */,
 				2C98B0CB2336EEFF005042B2 /* PlayerWindow.swift in Sources */,
+				2C6C1104234EAEF600565CA3 /* SplitViewController.swift in Sources */,
 				2C7F65BD233D215900EC6415 /* PlayerView.swift in Sources */,
 				2C7F65FC233D5FF500EC6415 /* AppDelegate.swift in Sources */,
+				2C7652DD234E8E6B000E8248 /* ColorView.swift in Sources */,
 				2C4C5903233FFCF60069BCA3 /* OpenURLViewController.swift in Sources */,
 				2C0A67D7232C3FAC00BC5270 /* PlayerWindowController.swift in Sources */,
 				2C4C5904233FFCF60069BCA3 /* OpenURLView.swift in Sources */,

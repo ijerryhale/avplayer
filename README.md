@@ -71,7 +71,11 @@ QuickTime Player Pro 7 stops working with Mac OS Catalina so we thought we'd hav
 <br>
 •   Add support for creating Trimmed Movies
 
-![marquee](https://cormya.com/avplayer-3.png "AVPlayer")
+## October 12, 2019
+
+•   Add support for displaying Media Characteristics
+
+![marquee](https://cormya.com/avplayer-4.png "AVPlayer")
 ## Contact
 
 - [Linkedin][2]

@@ -1,8 +1,8 @@
 /**
-    PlayerViewController.swift
+    Color.swift
     avplayer
 
-    Created by Jerry Hale on 9/21/19
+    Created by Jerry Hale on 10/9/19
     Copyright © 2019 jhale. All rights reserved
  
  This file is part of avplayer.
@@ -22,20 +22,17 @@
 
 */
 
-class PlayerWindow: NSWindow
+class ColorView: NSView
 {
-    var  constrainingToScreenSuspended = true
-    
-    func setConstrainingToScreenSuspended(value: Bool) { constrainingToScreenSuspended = value }
+    var backColor:NSColor = NSColor.lightGray
 
-    //  this window has its usual -constrainFrameRect:toScreen: behavior
-    //  temporarily suppressed. this enables our window's custom Full Screen
-    //  Exit animations to avoid being constrained by the
-    //  top edge of the screen and the menu bar.
     //  MARK: overrides
-    override func constrainFrameRect(_ frameRect: NSRect, to screen: NSScreen?) -> NSRect
+    override func draw(_ dirtyRect: NSRect)
     {
-        if constrainingToScreenSuspended { return (frameRect) }
-        else { return (super.constrainFrameRect(frameRect, to:screen)) }
-    } 
+        backColor.set()
+        backColor.setFill()
+        NSBezierPath(rect:bounds).fill()
+     }
+    
+    override func awakeFromNib() { super.awakeFromNib(); print("ColorView awakeFromNib") }
 }

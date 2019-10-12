@@ -1,8 +1,8 @@
 /**
-    OpenURLView.swift
+    PropertyViewController.swift
     avplayer
 
-    Created by Jerry Hale on 9/29/19
+    Created by Jerry Hale on 10/9/19
     Copyright © 2019 jhale. All rights reserved
  
  This file is part of avplayer.
@@ -19,15 +19,16 @@
 
  You should have received a copy of the GNU General Public License
  along with avplayer.  If not, see <https://www.gnu.org/licenses/>.
-.
+
 */
 
-class OpenURLView: NSView
+import Cocoa
+import AVFoundation
+
+class PropertyViewController: NSViewController
 {
-    //  MARK: overrides
-    override func awakeFromNib()
-    { super.awakeFromNib(); print("OpenURLView awakeFromNib")
-        
+    override func viewWillAppear()
+    { super.viewWillAppear(); print("PropertyViewController viewWillAppear")
 
     }
 }

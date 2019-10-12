@@ -2,8 +2,8 @@
     PlayerViewController.swift
     avplayer
 
-    Created by Jerry Hale on 9/1/19.
-    Copyright © 2019 jhale. All rights reserved.
+    Created by Jerry Hale on 9/1/19
+    Copyright © 2019 jhale. All rights reserved
  
  This file is part of avplayer.
 
@@ -29,6 +29,9 @@ private var VIEW_CONTROLLER_KVOCONTEXT = 0
 private var CURRENT_TIME_KVOCONTEXT = 0
 private let LAYER_BACK_COLOR = "KeyLayerBackgroundColor"
 
+private let scrubberLeftAnchor:CGFloat = 40.0
+private let scrubberWidthAnchor:CGFloat = 294.0
+
 class PlayerViewController: NSViewController
 {
     @IBOutlet weak var colorWell: NSColorWell!
@@ -37,11 +40,17 @@ class PlayerViewController: NSViewController
     @IBOutlet weak var volumeSlider: NSSlider!
     @IBOutlet weak var playPauseBtn: NSButton!
     
+    @IBOutlet weak var formatText: NSTextField!
+    @IBOutlet weak var frameRateText: NSTextField!
+    @IBOutlet weak var currentSizeText: NSTextField!
+
+    @objc var scrubberSlider = Slider.init(frame: NSMakeRect(scrubberLeftAnchor, 36.0, scrubberWidthAnchor, 24.0))
     @objc dynamic var currentTime:Double = 0.0
-    @objc var scrubberSlider = Slider.init(frame: NSMakeRect(250, 14, 346, 24))
     @objc let player = AVPlayer()
-    
-    private var duration:CMTime = CMTime.zero
+
+    private var boundsObserver: NSKeyValueObservation?  //  observe for PlayerView bounds changes
+    private var duration:CMTime = CMTime.zero           //  movie duration
+    private var playerLayer:AVPlayerLayer!              //  movie AVPlayerLayer
     
     var frameRate:Float = 0.0
     var smpteObserverToken: Any?
@@ -125,6 +134,18 @@ class PlayerViewController: NSViewController
         else if player.rate > -8.0 { player.rate -= 2.0 }
     }
 
+    func updateAVVideoRectSize()
+    {
+        let width = self.playerLayer.videoRect.size.width
+        let height = self.playerLayer.videoRect.size.height
+
+        if width > 0 && height > 0
+        {
+            self.currentSizeText.stringValue = Int(width).description
+                 + " x " + Int(height).description
+        }
+    }
+
     //  MARK: @objc
     @objc private func toggleTimeCodeDisplay() { smpteTime.isHidden = !smpteTime.isHidden }
     @objc dynamic var movieCurrentTime: Double
@@ -169,7 +190,11 @@ class PlayerViewController: NSViewController
             scrubberSlider!.floatValue = hasValidDuration ? Float(CMTimeGetSeconds(player.currentTime())) : 0.001
             scrubberSlider!.maxValue =  hasValidDuration ? Double(CMTimeGetSeconds(duration)) : 0.001
 
+            frameRateText.stringValue = hasValidDuration ? frameRate.truncate(places: 3).description : ""
+            
             playPauseBtn.isEnabled = hasValidDuration
+            
+            updateAVVideoRectSize()
         }
         else if keyPath == #keyPath(PlayerViewController.player.currentItem.status)
         {
@@ -202,32 +227,44 @@ class PlayerViewController: NSViewController
         
         return affectedKeyPathsMappingByKey[key] ?? super.keyPathsForValuesAffectingValue(forKey: key)
     }
-
+    
     override func viewWillDisappear()
-    { super.viewWillDisappear(); print("ViewController viewWillDisappear ")
+    { super.viewWillDisappear(); print("PlayerViewController viewWillDisappear")
         
         //  remove all Observers
         NotificationCenter.default.removeObserver(self, name: Notification.Name(rawValue: NOTIF_TOGGLETIMECODEDISPLAY), object: nil)
+        
+        boundsObserver?.invalidate()
+    }
+
+    override func viewWillAppear()
+    { super.viewWillAppear(); print("PlayerViewController viewWillAppear")
+
+        //  set scrubberSlider Constraints
+        scrubberSlider!.translatesAutoresizingMaskIntoConstraints = false
+        scrubberSlider!.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:scrubberLeftAnchor).isActive = true
+        scrubberSlider!.widthAnchor.constraint(equalToConstant: scrubberWidthAnchor).isActive = true
+        
+        if USE_DEFAULT_MOV { playPauseBtn.title = "Pause"; player.play() }
+        else { playPauseBtn.title = "Play" }
+        
+        //  observe for changes to AVPlayerLayer
+        //  videoRect and update Current Size
+        boundsObserver = view.observe(\.frame, options: [.new, .initial])
+        { object, change in self.updateAVVideoRectSize() }
     }
     
-    override func viewWillAppear()
-    { super.viewWillAppear(); print("ViewController viewWillAppear ")
-
-        playPauseBtn.title = "Pause"
-        player.play()
-    }
-
     override func viewDidLoad()
-    { super.viewDidLoad(); print("ViewController viewDidLoad ")
+    { super.viewDidLoad(); print("PlayerViewController viewDidLoad")
 
-        let layer = AVPlayerLayer(player: player)
+        playerLayer = AVPlayerLayer(player: player)
 
-        layer.videoGravity = .resizeAspect
-        layer.autoresizingMask = [.layerHeightSizable, .layerWidthSizable]
-        layer.frame = playerView.bounds
+        playerLayer.videoGravity = .resizeAspect
+        playerLayer.autoresizingMask = [.layerHeightSizable, .layerWidthSizable]
+        playerLayer.frame = playerView.bounds
 
         playerView.wantsLayer = true
-        playerView.layer?.addSublayer(layer)
+        playerView.layer?.addSublayer(playerLayer)
 
         scrubberSlider!.autoresizingMask = [.minXMargin]
         scrubberSlider!.minValue = 0.0
@@ -264,7 +301,7 @@ class PlayerViewController: NSViewController
                 }
             } catch { print("NSKeyedUnarchiver.unarchiveTopLevelObjectWithData error") }
         }
-        
+
         //  set up observer to update SMPTE display
         //  observer only runs while player is playing
          smpteObserverToken =

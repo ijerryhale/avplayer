@@ -2,8 +2,8 @@
     AVPlayerTests.swift
     avplayer
 
-    Created by Jerry Hale on 9/11/19.
-    Copyright © 2019 jhale. All rights reserved.
+    Created by Jerry Hale on 9/11/19
+    Copyright © 2019 jhale. All rights reserved
  
  This file is part of avplayer.
 

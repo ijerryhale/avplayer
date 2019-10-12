@@ -2,8 +2,8 @@
     PlayerWindowController.swift
     avplayer
 
-    Created by Jerry Hale on 9/24/19.
-    Copyright © 2019 jhale. All rights reserved.
+    Created by Jerry Hale on 9/24/19
+    Copyright © 2019 jhale. All rights reserved
  
  This file is part of avplayer.
 
@@ -26,47 +26,53 @@ import Cocoa
 import AVFoundation
 import Foundation
 
+let USE_DEFAULT_MOV = true
+
 //  https://gist.github.com/acj/b8c5f8eafe0605a38692
 typealias TrimCompletion = (Error?) -> ()
-
 typealias TrimPoints = [(CMTime, CMTime)]
 
-func verifyPresetForAsset(preset: String, asset: AVAsset) -> Bool {
+func verifyPresetForAsset(preset: String, asset: AVAsset) -> Bool
+{
     let compatiblePresets = AVAssetExportSession.exportPresets(compatibleWith: asset)
     let filteredPresets = compatiblePresets.filter { $0 == preset }
     
-    return filteredPresets.count > 0 || preset == AVAssetExportPresetHighestQuality
+    return (filteredPresets.count > 0 || preset == AVAssetExportPresetHighestQuality)
 }
 
-func removeFileAtURLIfExists(url: NSURL) {
-    if let filePath = url.path {
+func removeFileAtURLIfExists(url: NSURL)
+{
+    if let filePath = url.path
+    {
         let fileManager = FileManager.default
-        if fileManager.fileExists(atPath: filePath) {
-            do {
-                try fileManager.removeItem(atPath: filePath)
-            }
-            catch {
-                print("Couldn't remove existing destination file: \(error)")
-            }
+
+        if fileManager.fileExists(atPath: filePath)
+        {
+            do { try fileManager.removeItem(atPath: filePath) }
+            catch { print("Couldn't remove existing destination file: \(error)") }
         }
     }
 }
 
-func trimVideo(_ sourceURL: URL, destinationURL: URL, trimPoints: TrimPoints, completion: TrimCompletion?) {
+func trimVideo(_ sourceURL: URL, destinationURL: URL, trimPoints: TrimPoints, completion: TrimCompletion?)
+{
     assert(sourceURL.isFileURL)
     assert(destinationURL.isFileURL)
     
     let options = [ AVURLAssetPreferPreciseDurationAndTimingKey: true ]
     let asset = AVURLAsset(url: sourceURL, options: options)
     let preferredPreset = AVAssetExportPresetHighestQuality
-    if verifyPresetForAsset(preset: preferredPreset, asset: asset) {
+
+    if verifyPresetForAsset(preset: preferredPreset, asset: asset)
+    {
         let composition = AVMutableComposition()
         
         guard
             let videoCompTrack = composition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: CMPersistentTrackID()),
             let audioCompTrack = composition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: CMPersistentTrackID())
-        else {
-            let error = NSError(domain: "org.linuxguy.VideoLab", code: -1, userInfo: [NSLocalizedDescriptionKey: "Couldn't add mutable tracks"])
+        else
+        {
+            let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "Couldn't add mutable tracks"])
             completion?(error)
             return
         }
@@ -74,25 +80,29 @@ func trimVideo(_ sourceURL: URL, destinationURL: URL, trimPoints: TrimPoints, co
         guard
             let assetVideoTrack = asset.tracks(withMediaType: AVMediaType.video).first,
             let assetAudioTrack = asset.tracks(withMediaType: AVMediaType.audio).first
-        else {
-            let error = NSError(domain: "org.linuxguy.VideoLab", code: -1, userInfo: [NSLocalizedDescriptionKey: "Couldn't find video or audio track in source asset"])
+        else
+        {
+            let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "Couldn't find video or audio track in source asset"])
             completion?(error)
             return
         }
         
-        // Preserve the orientation of the source asset
+        //  preserve the orientation of the source asset
         videoCompTrack.preferredTransform = assetVideoTrack.preferredTransform
         
         var accumulatedTime = CMTime.zero
-        for (startTimeForCurrentSlice, endTimeForCurrentSlice) in trimPoints {
+        for (startTimeForCurrentSlice, endTimeForCurrentSlice) in trimPoints
+        {
             let durationOfCurrentSlice = CMTimeSubtract(endTimeForCurrentSlice, startTimeForCurrentSlice)
             let timeRangeForCurrentSlice = CMTimeRangeMake(start: startTimeForCurrentSlice, duration: durationOfCurrentSlice)
-            do {
+            do
+            {
                 try videoCompTrack.insertTimeRange(timeRangeForCurrentSlice, of: assetVideoTrack, at: accumulatedTime)
                 try audioCompTrack.insertTimeRange(timeRangeForCurrentSlice, of: assetAudioTrack, at: accumulatedTime)
             }
-            catch {
-                let error = NSError(domain: "org.linuxguy.VideoLab", code: -1, userInfo: [NSLocalizedDescriptionKey: "Couldn't insert time ranges: \(error)"])
+            catch
+            {
+                let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "Couldn't insert time ranges: \(error)"])
                 completion?(error)
                 return
             }
@@ -100,26 +110,26 @@ func trimVideo(_ sourceURL: URL, destinationURL: URL, trimPoints: TrimPoints, co
             accumulatedTime = CMTimeAdd(accumulatedTime, durationOfCurrentSlice)
         }
         
-        guard let exportSession = AVAssetExportSession(asset: composition, presetName: preferredPreset) else {
-            let error = NSError(domain: "org.linuxguy.VideoLab", code: -1, userInfo: [NSLocalizedDescriptionKey: "Couldn't create export session"])
+        guard let exportSession = AVAssetExportSession(asset: composition, presetName: preferredPreset)
+        else
+        {
+            let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "Couldn't create export session"])
             completion?(error)
             return
         }
+
         exportSession.outputURL = destinationURL
         exportSession.outputFileType = AVFileType.mp4
         exportSession.shouldOptimizeForNetworkUse = true
         
         removeFileAtURLIfExists(url: destinationURL as NSURL)
         
-        exportSession.exportAsynchronously(completionHandler: {
-            completion?(exportSession.error)
-        })
-    } else {
-        let error = NSError(domain: "org.linuxguy.VideoLab", code: -1, userInfo: [NSLocalizedDescriptionKey: "Could not find a suitable export preset for the input video"])
-        if let completion = completion {
-            completion(error)
-            return
-        }
+        exportSession.exportAsynchronously(completionHandler: { completion?(exportSession.error) })
+    }
+    else
+    {
+        let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "Could not find a suitable export preset for the input video"])
+        if let completion = completion { completion(error); return }
     }
 }
 
@@ -136,8 +146,11 @@ class PlayerWindowController : NSWindowController
     //  @objc private func willEnterFull(notification: NSNotification) { }
     //  @objc private func didExitFull(notification: NSNotification) { }
 
+    
     var frameForNonFullScreenMode = NSMakeRect(0.0, 0.0, 0.0, 0.0)
+
     var playerViewController:PlayerViewController!
+    var propertyViewController:PropertyViewController!
     
     private static let assetKeysRequiredToPlay = [ "playable", "hasProtectedContent"]
  
@@ -179,6 +192,54 @@ class PlayerWindowController : NSWindowController
                     else { print("Success") }
                 }
             }
+        }
+    }
+
+    //  fill in some of the assorted text
+    //  values in the PlayerViewController
+    func assignMediaCharacteristics(_ newAsset: AVURLAsset?)
+    {   //  estimatedDataRate
+        guard
+            let tracks = newAsset?.tracks(withMediaType: .video)
+        else
+        {
+            let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "Couldn't find Video Track in AVAsset"])
+            
+            print("Failure: \(error)")
+
+            return
+        }
+
+        let descArray = tracks[0].formatDescriptions as! [CMFormatDescription]
+ 
+        if (CMFormatDescriptionGetMediaType(descArray[0]) == kCMMediaType_Video)
+        {
+            let dimensions = CMVideoFormatDescriptionGetDimensions(descArray[0]);
+            let codec = CMFormatDescriptionGetExtension(descArray[0], extensionKey: "FormatName" as CFString)
+            let dims = dimensions.width.description + " x " + dimensions.height.description
+            
+            var codecText:String = ""
+            switch codec as! String
+            {
+                case "'apch'":
+                    codecText = "Apple ProRes 422 (HQ)"
+                break
+                case "'avc1'",
+                     "'x264'":
+                    codecText = "H.264"
+                break
+                case "'mpg4'",
+                     "'mp4v'":
+                    codecText = "MPEG-4 Video"
+                break
+
+                default:
+                    codecText = codec as! String
+                break
+            }
+            
+            playerViewController.formatText.stringValue = codecText + " " + dims
+            
         }
     }
 
@@ -230,15 +291,14 @@ class PlayerWindowController : NSWindowController
                     return
                 }
                 
+                self.assignMediaCharacteristics(newAsset)
+                
                 //  we can play this asset
                 //  create a new `AVPlayerItem
                 //  and make it our player's current item.
                 self.playerViewController.playerItem = AVPlayerItem(asset: newAsset)
-                self.playerViewController.volumeSlider.floatValue = self.playerViewController.player.volume
-                
                 self.playerViewController.frameRate
-                        = self.playerViewController.player.currentItem?.asset.tracks[0].nominalFrameRate ?? 0.0
-                
+                                        = self.playerViewController.player.currentItem?.asset.tracks[0].nominalFrameRate ?? 0.0
                 //  if this is a local file
                 if self.asset!.url.isFileURL
                 {
@@ -253,8 +313,6 @@ class PlayerWindowController : NSWindowController
     //  MARK: overrides
     override func windowDidLoad()
     { super.windowDidLoad()
-
-        playerViewController = contentViewController as? PlayerViewController
         
         ////    openFile(notification: Notification)
         NotificationCenter.default.addObserver(self, selector: #selector(openFile(_:)),
@@ -266,14 +324,14 @@ class PlayerWindowController : NSWindowController
         NotificationCenter.default.addObserver(self, selector: #selector(windowWillClose(_:)),
                                                name: NSWindow.willCloseNotification, object: nil)
         
-        let USE_DEFAULT_MOV = true
+        
 
         if USE_DEFAULT_MOV
         {
             //  let url = URL(fileURLWithPath:"/Users/jhale/Desktop/30fps_video_sample.mp4")
             let url = URL(string: "https://cormya.com/the-addams-family-trailer-2_h.480.mov")
             asset = AVURLAsset(url: url! , options: nil)
-        
+            
             (NSApplication.shared.delegate as! AppDelegate).isLocalAsset = false
         }
     }
@@ -283,6 +341,11 @@ class PlayerWindowController : NSWindowController
         
         frameForNonFullScreenMode = window!.frame
         shouldCascadeWindows = true
+
+        let splitViewController = contentViewController as! SplitViewController
+        
+        playerViewController = splitViewController.splitViewItems[0].viewController as? PlayerViewController
+        propertyViewController = splitViewController.splitViewItems[1].viewController as? PropertyViewController
         
         //  there's still bugs here if there is
         //  a pref set and the user has multiple
@@ -290,14 +353,15 @@ class PlayerWindowController : NSWindowController
         let prefs = UserDefaults.standard.data(forKey: WINDOW_FRAME)
         
         if prefs == nil { window?.setFrame(NSMakeRect(FRAME_DEFAULT_X, FRAME_DEFAULT_Y, FRAME_DEFAULT_WIDTH, FRAME_DEFAULT_HGHT), display: true) }
-        
-        do {
-            if let frame = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(prefs!) as? NSRect
-            {
-                window?.setFrame(frame, display: true)
-            }
-        } catch { print("NSKeyedUnarchiver.unarchiveObject error") }
-        
+        else
+        {
+            do {
+                if let frame = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(prefs!) as? NSRect
+                {
+                    window?.setFrame(frame, display: true)
+                }
+            } catch { print("NSKeyedUnarchiver.unarchiveObject error") }
+        }
         //  full screen change notification
         //  NotificationCenter.default.addObserver(self, selector: #selector(willEnterFull),
         //      name: NSWindow.willEnterFullScreenNotification, object: nil)
@@ -398,3 +462,4 @@ extension PlayerWindowController : NSWindowDelegate
             .autoHideMenuBar])  // yes we want the menu bar to show/hide
     }
 }
+
