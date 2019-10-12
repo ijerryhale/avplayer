@@ -25,6 +25,8 @@ So, maybe not as simple as it started out to be.
 <br>
 QuickTime Player Pro 7 stops working with Mac OS Catalina so we thought we'd have some fun.
 
+![marquee](https://cormya.com/avplayer-4.png "AVPlayer")
+
 
 ## Requirements
 
@@ -75,7 +77,6 @@ QuickTime Player Pro 7 stops working with Mac OS Catalina so we thought we'd hav
 
 •   Add support for displaying Media Characteristics
 
-![marquee](https://cormya.com/avplayer-4.png "AVPlayer")
 ## Contact
 
 - [Linkedin][2]
