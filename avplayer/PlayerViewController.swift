@@ -40,6 +40,9 @@ class PlayerViewController: NSViewController
     @IBOutlet weak var volumeSlider: NSSlider!
     @IBOutlet weak var playPauseBtn: NSButton!
     
+    @IBOutlet weak var noVideoLabel: NSTextField!
+    @IBOutlet weak var unplayableLabel: NSTextField!
+    
     @IBOutlet weak var formatText: NSTextField!
     @IBOutlet weak var frameRateText: NSTextField!
     @IBOutlet weak var currentSizeText: NSTextField!
@@ -48,9 +51,9 @@ class PlayerViewController: NSViewController
     @objc dynamic var currentTime:Double = 0.0
     @objc let player = AVPlayer()
 
+    private var playerLayer:AVPlayerLayer!              //  movie AVPlayerLayer
     private var boundsObserver: NSKeyValueObservation?  //  observe for PlayerView bounds changes
     private var duration:CMTime = CMTime.zero           //  movie duration
-    private var playerLayer:AVPlayerLayer!              //  movie AVPlayerLayer
     
     var frameRate:Float = 0.0
     var smpteObserverToken: Any?
@@ -239,7 +242,6 @@ class PlayerViewController: NSViewController
 
     override func viewWillAppear()
     { super.viewWillAppear(); print("PlayerViewController viewWillAppear")
-
         //  set scrubberSlider Constraints
         scrubberSlider!.translatesAutoresizingMaskIntoConstraints = false
         scrubberSlider!.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:scrubberLeftAnchor).isActive = true
@@ -256,6 +258,13 @@ class PlayerViewController: NSViewController
     
     override func viewDidLoad()
     { super.viewDidLoad(); print("PlayerViewController viewDidLoad")
+
+        noVideoLabel.translatesAutoresizingMaskIntoConstraints = false
+        unplayableLabel.translatesAutoresizingMaskIntoConstraints = false
+        noVideoLabel.centerXAnchor.constraint(equalTo: playerView.centerXAnchor).isActive = true
+        noVideoLabel.centerYAnchor.constraint(equalTo: playerView.centerYAnchor).isActive = true
+        unplayableLabel.centerXAnchor.constraint(equalTo: playerView.centerXAnchor).isActive = true
+        unplayableLabel.centerYAnchor.constraint(equalTo: playerView.centerYAnchor).isActive = true
 
         playerLayer = AVPlayerLayer(player: player)
 

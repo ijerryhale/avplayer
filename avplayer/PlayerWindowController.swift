@@ -26,7 +26,7 @@ import Cocoa
 import AVFoundation
 import Foundation
 
-let USE_DEFAULT_MOV = true
+let USE_DEFAULT_MOV = false
 
 //  https://gist.github.com/acj/b8c5f8eafe0605a38692
 typealias TrimCompletion = (Error?) -> ()
@@ -54,84 +54,7 @@ func removeFileAtURLIfExists(url: NSURL)
     }
 }
 
-func trimVideo(_ sourceURL: URL, destinationURL: URL, trimPoints: TrimPoints, completion: TrimCompletion?)
-{
-    assert(sourceURL.isFileURL)
-    assert(destinationURL.isFileURL)
-    
-    let options = [ AVURLAssetPreferPreciseDurationAndTimingKey: true ]
-    let asset = AVURLAsset(url: sourceURL, options: options)
-    let preferredPreset = AVAssetExportPresetHighestQuality
 
-    if verifyPresetForAsset(preset: preferredPreset, asset: asset)
-    {
-        let composition = AVMutableComposition()
-        
-        guard
-            let videoCompTrack = composition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: CMPersistentTrackID()),
-            let audioCompTrack = composition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: CMPersistentTrackID())
-        else
-        {
-            let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "Couldn't add mutable tracks"])
-            completion?(error)
-            return
-        }
-        
-        guard
-            let assetVideoTrack = asset.tracks(withMediaType: AVMediaType.video).first,
-            let assetAudioTrack = asset.tracks(withMediaType: AVMediaType.audio).first
-        else
-        {
-            let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "Couldn't find video or audio track in source asset"])
-            completion?(error)
-            return
-        }
-        
-        //  preserve the orientation of the source asset
-        videoCompTrack.preferredTransform = assetVideoTrack.preferredTransform
-        
-        var accumulatedTime = CMTime.zero
-        for (startTimeForCurrentSlice, endTimeForCurrentSlice) in trimPoints
-        {
-            let durationOfCurrentSlice = CMTimeSubtract(endTimeForCurrentSlice, startTimeForCurrentSlice)
-            let timeRangeForCurrentSlice = CMTimeRangeMake(start: startTimeForCurrentSlice, duration: durationOfCurrentSlice)
-            do
-            {
-                try videoCompTrack.insertTimeRange(timeRangeForCurrentSlice, of: assetVideoTrack, at: accumulatedTime)
-                try audioCompTrack.insertTimeRange(timeRangeForCurrentSlice, of: assetAudioTrack, at: accumulatedTime)
-            }
-            catch
-            {
-                let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "Couldn't insert time ranges: \(error)"])
-                completion?(error)
-                return
-            }
-            
-            accumulatedTime = CMTimeAdd(accumulatedTime, durationOfCurrentSlice)
-        }
-        
-        guard let exportSession = AVAssetExportSession(asset: composition, presetName: preferredPreset)
-        else
-        {
-            let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "Couldn't create export session"])
-            completion?(error)
-            return
-        }
-
-        exportSession.outputURL = destinationURL
-        exportSession.outputFileType = AVFileType.mp4
-        exportSession.shouldOptimizeForNetworkUse = true
-        
-        removeFileAtURLIfExists(url: destinationURL as NSURL)
-        
-        exportSession.exportAsynchronously(completionHandler: { completion?(exportSession.error) })
-    }
-    else
-    {
-        let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "Could not find a suitable export preset for the input video"])
-        if let completion = completion { completion(error); return }
-    }
-}
 
 let NOTIF_OPENFILE = "OpenFile"
 private let WINDOW_FRAME = "KeyWindowFrame"
@@ -164,8 +87,92 @@ class PlayerWindowController : NSWindowController
         }
     }
 
+    func trimVideo(_ sourceURL: URL, destinationURL: URL, trimPoints: TrimPoints, completion: TrimCompletion?)
+    {
+        assert(sourceURL.isFileURL)
+        assert(destinationURL.isFileURL)
+        
+        let options = [ AVURLAssetPreferPreciseDurationAndTimingKey: true ]
+        let asset = AVURLAsset(url: sourceURL, options: options)
+        let preferredPreset = AVAssetExportPresetHighestQuality
+
+        if verifyPresetForAsset(preset: preferredPreset, asset: asset)
+        {
+            let composition = AVMutableComposition()
+            
+            guard
+                let videoCompTrack = composition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: CMPersistentTrackID()),
+                let audioCompTrack = composition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: CMPersistentTrackID())
+            else
+            {
+                let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "Couldn't add mutable tracks"])
+                completion?(error)
+                return
+            }
+            
+            guard
+                let assetVideoTrack = asset.tracks(withMediaType: AVMediaType.video).first,
+                let assetAudioTrack = asset.tracks(withMediaType: AVMediaType.audio).first
+            else
+            {
+                playerViewController.noVideoLabel.isHidden = false
+                
+                let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "Couldn't find video or audio track in source asset"])
+                completion?(error)
+                return
+            }
+            
+            //  preserve the orientation of the source asset
+            videoCompTrack.preferredTransform = assetVideoTrack.preferredTransform
+            
+            var accumulatedTime = CMTime.zero
+            for (startTimeForCurrentSlice, endTimeForCurrentSlice) in trimPoints
+            {
+                let durationOfCurrentSlice = CMTimeSubtract(endTimeForCurrentSlice, startTimeForCurrentSlice)
+                let timeRangeForCurrentSlice = CMTimeRangeMake(start: startTimeForCurrentSlice, duration: durationOfCurrentSlice)
+                do
+                {
+                    try videoCompTrack.insertTimeRange(timeRangeForCurrentSlice, of: assetVideoTrack, at: accumulatedTime)
+                    try audioCompTrack.insertTimeRange(timeRangeForCurrentSlice, of: assetAudioTrack, at: accumulatedTime)
+                }
+                catch
+                {
+                    let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "Couldn't insert time ranges: \(error)"])
+                    completion?(error)
+                    return
+                }
+                
+                accumulatedTime = CMTimeAdd(accumulatedTime, durationOfCurrentSlice)
+            }
+            
+            guard let exportSession = AVAssetExportSession(asset: composition, presetName: preferredPreset)
+            else
+            {
+                let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "Couldn't create export session"])
+                completion?(error)
+                return
+            }
+
+            exportSession.outputURL = destinationURL
+            exportSession.outputFileType = AVFileType.mp4
+            exportSession.shouldOptimizeForNetworkUse = true
+            
+            removeFileAtURLIfExists(url: destinationURL as NSURL)
+            
+            exportSession.exportAsynchronously(completionHandler: { completion?(exportSession.error) })
+        }
+        else
+        {
+            let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "Could not find a suitable export preset for the input video"])
+            if let completion = completion { completion(error); return }
+        }
+    }
+    
     @objc func openFile(_ notification: Notification)
     {
+        playerViewController.unplayableLabel.isHidden = true
+        playerViewController.noVideoLabel.isHidden = true
+        
         if let url:URL = notification.object as? URL
         {
             //  print(url.absoluteString)
@@ -207,6 +214,8 @@ class PlayerWindowController : NSWindowController
             
             print("Failure: \(error)")
 
+            playerViewController.noVideoLabel.isHidden = false
+            
             return
         }
 
@@ -286,6 +295,8 @@ class PlayerWindowController : NSWindowController
                     print(newAsset.hasProtectedContent)
                     let message = NSLocalizedString("error.asset_not_playable.description", comment: "Can't use this AVAsset because it isn't playable or has protected content")
 
+                    self.playerViewController.unplayableLabel.isHidden = false
+                    
                     handleErrorWithMessage(message)
 
                     return

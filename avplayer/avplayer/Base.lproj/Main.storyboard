@@ -736,6 +736,24 @@
                                 <rect key="frame" x="0.0" y="71" width="640" height="180"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </customView>
+                            <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gag-DZ-UVm">
+                                <rect key="frame" x="262" y="106" width="115" height="29"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="No Video" id="jI0-FO-ydp">
+                                    <font key="font" metaFont="system" size="24"/>
+                                    <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WL1-oc-Ozo">
+                                <rect key="frame" x="218" y="106" width="203" height="29"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Unplayable Asset" id="rsf-uq-GWD">
+                                    <font key="font" metaFont="system" size="24"/>
+                                    <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="RXk-f6-mKN">
                                 <rect key="frame" x="0.0" y="200" width="640" height="24"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -889,15 +907,17 @@ IA
                         <outlet property="currentSizeText" destination="YaS-LD-Bhv" id="kWx-Sg-GUB"/>
                         <outlet property="formatText" destination="M6v-Oe-Rfn" id="AdG-x6-orX"/>
                         <outlet property="frameRateText" destination="GlV-yn-fzp" id="AiC-a9-NrV"/>
+                        <outlet property="noVideoLabel" destination="gag-DZ-UVm" id="BTq-y1-fOO"/>
                         <outlet property="playPauseBtn" destination="8EH-ci-YWY" id="GDG-k9-Hsz"/>
                         <outlet property="playerView" destination="PcC-FB-3qE" id="W8I-75-d1k"/>
                         <outlet property="smpteTime" destination="RXk-f6-mKN" id="bSY-3f-7Ce"/>
+                        <outlet property="unplayableLabel" destination="WL1-oc-Ozo" id="ddm-fR-RVp"/>
                         <outlet property="volumeSlider" destination="0Dz-6X-gAN" id="TYt-bZ-D6H"/>
                     </connections>
                 </viewController>
                 <customObject id="KG5-ol-fde" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="922" y="-1271"/>
+            <point key="canvasLocation" x="922" y="-1275"/>
         </scene>
         <!--Property View Controller-->
         <scene sceneID="v5S-SP-ert">
