@@ -59,33 +59,3 @@ class SplitViewController: NSSplitViewController
         }
     }
 }
-
-
-//-(IBAction)toggleBtmPane:(id)sender;
-//{
-//    #pragma unused (sender)
-//    NSView  *top  = [[_splitView subviews] objectAtIndex:0];
-//    NSView  *btm = [[_splitView subviews] objectAtIndex:1];
-//    NSRect  topFrame = [top frame];
-//    NSRect  btmFrame = [btm frame];
-//    BOOL    btmViewCollapsed = [_splitView isSubviewCollapsed:[[_splitView subviews] objectAtIndex: 1]];
-//
-//    if (btmViewCollapsed || btmFrame.size.height == 0)
-//    {
-//        topFrame.size.height = (topFrame.size.height - 402 - [_splitView dividerThickness]);
-//        btmFrame.origin.y = topFrame.size.height + [_splitView dividerThickness];
-//        btmFrame.size.height = 402;
-//
-//        [top setFrameSize:topFrame.size];
-//        [btm setFrame:btmFrame];
-//        [btm setHidden:NO];
-//    }
-//    else
-//    {
-//        [top setFrameSize:NSMakeSize(topFrame.size.width, [_splitView frame].size.height)];
-//        [btm setHidden:YES];
-//    }
-//
-//    [_splitView display];
-//}
-
