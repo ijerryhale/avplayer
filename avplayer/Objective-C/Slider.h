@@ -22,8 +22,8 @@
 
 */
 
-@interface NSBezierPath (GTMBezierPathCGPathAdditions) 
-- (CGPathRef)gtm_createCGPath;
+@interface NSBezierPath (BezierPathCGPathAdditions)
+- (CGPathRef)createCGPath;
 @end
 
 @class Slider;

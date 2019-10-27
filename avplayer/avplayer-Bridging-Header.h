@@ -26,11 +26,9 @@
 @import Cocoa;
 @import AVFoundation;
 
+#import "SBLanguages.h"
+
+#import "DictionaryKey.h"
+
 #import "Tracker.h"
 #import "Slider.h"
-
-
-CGFloat FRAME_DEFAULT_X = 186;
-CGFloat FRAME_DEFAULT_Y = 186;
-CGFloat FRAME_DEFAULT_WIDTH = 640;
-CGFloat FRAME_DEFAULT_HGHT = 530;

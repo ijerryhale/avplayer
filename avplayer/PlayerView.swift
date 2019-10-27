@@ -39,52 +39,49 @@ class PlayerView: NSView
             path.lineWidth = 15.0
             path.stroke()
         }
-     }
-    
-    override func draggingExited(_ sender: NSDraggingInfo?) { backColor.set(); isReceivingDrag = false; }
-    override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation
-    {
-        let pasteboard = sender.draggingPasteboard
-        let sourceDragMask = sender.draggingSourceOperationMask
-        
-        backColor = NSColor.init(cgColor: self.layer!.backgroundColor!)!
-        
-        if (pasteboard.types?.contains(NSPasteboard.PasteboardType.fileURL))!
-        {
-            let fileURL = NSURL(from: pasteboard) as URL?
-        
-            if fileURL?.pathExtension == "mov"
-            || fileURL?.pathExtension == "mp4"
-            || fileURL?.pathExtension == "m4v"
-            {
-                if sourceDragMask.rawValue & NSDragOperation.copy.rawValue > 0
-                {
-                    isReceivingDrag = true
-                    
-                    return (NSDragOperation.copy)
-                }
-            }
-        }
-
-        return ([])
+        else { backColor.set() }
     }
-    
+
     override func performDragOperation(_ sender: NSDraggingInfo) -> Bool
     {
+        guard let pasteboard = sender.draggingPasteboard.propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray,
+                 let path = pasteboard[0] as? String
+            else { return (false) }
+
+        NotificationCenter.default.post(name: Notification.Name(rawValue: NOTIF_OPENFILE), object: URL(fileURLWithPath: path))
+
         isReceivingDrag = false
         
-        guard let pasteboard = sender.draggingPasteboard.propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray,
-              let filePath = pasteboard[0] as? String
-        else { return false }
-
-        NotificationCenter.default.post(name: Notification.Name(rawValue: NOTIF_OPENFILE), object: URL(fileURLWithPath: filePath))
-
         return (true)
+    }
+
+    override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation
+    {
+        func checkExtension(_ drag: NSDraggingInfo) -> Bool
+        {
+            guard let board = drag.draggingPasteboard.propertyList(forType: NSPasteboard.PasteboardType(rawValue: "NSFilenamesPboardType")) as? NSArray,
+                   let path = board[0] as? String
+             else { return false }
+
+             let suffix = URL(fileURLWithPath: path).pathExtension
+             for ext in expectedExt { if ext == suffix { return true } }
+            
+            return (false)
+        }
+
+        if checkExtension(sender) == true
+        {
+            backColor = NSColor.init(cgColor: self.layer!.backgroundColor!)!
+            isReceivingDrag = true
+                   
+            return (.copy)
+
+        } else { return (NSDragOperation()) }
     }
 
     override func awakeFromNib()
     { super.awakeFromNib(); print("PlayerView awakeFromNib")
         
-        registerForDraggedTypes([NSPasteboard.PasteboardType.fileURL])
+        registerForDraggedTypes([NSPasteboard.PasteboardType.URL, NSPasteboard.PasteboardType.fileURL])
     }
 }

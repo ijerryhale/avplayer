@@ -11,17 +11,21 @@
 		2C440059234D0D0000DC8E14 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2C440058234D0D0000DC8E14 /* README.md */; };
 		2C4C5900233FFBAA0069BCA3 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4C58FF233FFBAA0069BCA3 /* PlayerViewController.swift */; };
 		2C4C5903233FFCF60069BCA3 /* OpenURLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4C5901233FFCF60069BCA3 /* OpenURLViewController.swift */; };
-		2C4C5904233FFCF60069BCA3 /* OpenURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4C5902233FFCF60069BCA3 /* OpenURLView.swift */; };
 		2C6C1104234EAEF600565CA3 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6C1103234EAEF600565CA3 /* SplitViewController.swift */; };
-		2C6C1106234EB06E00565CA3 /* PropertyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6C1105234EB06E00565CA3 /* PropertyViewController.swift */; };
+		2C6C1106234EB06E00565CA3 /* TracksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6C1105234EB06E00565CA3 /* TracksViewController.swift */; };
 		2C7652DD234E8E6B000E8248 /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7652DC234E8E6B000E8248 /* ColorView.swift */; };
+		2C77C6BE2364A6780033861C /* track_audio_format.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C77C6BC2364A6780033861C /* track_audio_format.plist */; };
 		2C7F65BD233D215900EC6415 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7F65BC233D215800EC6415 /* PlayerView.swift */; };
 		2C7F65FC233D5FF500EC6415 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B4D1C16C64200C9E45D /* AppDelegate.swift */; };
+		2C82E912235BAE5000BE1097 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C82E910235BAE5000BE1097 /* Main.storyboard */; };
+		2C82E918235BB07C00BE1097 /* TracksViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C82E916235BB07C00BE1097 /* TracksViewController.storyboard */; };
 		2C98B0CB2336EEFF005042B2 /* PlayerWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98B0CA2336EEFF005042B2 /* PlayerWindow.swift */; };
 		2C9B511C234BE84E00EBF905 /* Tracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9B511A234BE84E00EBF905 /* Tracker.m */; };
 		2C9B511D234BE84E00EBF905 /* Slider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9B511B234BE84E00EBF905 /* Slider.m */; };
 		2CAD48932342A8B9002ED2F8 /* Marker in Resources */ = {isa = PBXBuildFile; fileRef = 2CAD48922342A8B9002ED2F8 /* Marker */; };
-		2CB8676223426955004B5B77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CB8676023426955004B5B77 /* Main.storyboard */; };
+		2CB04280235CA0E100DB8538 /* DictionaryKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB0427E235CA0E100DB8538 /* DictionaryKey.m */; };
+		2CB04285235CCBB800DB8538 /* AVTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB04284235CCBB800DB8538 /* AVTrack.swift */; };
+		2CBBE6252358FB1300FAD8FA /* SBLanguages.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CBBE6242358FB1300FAD8FA /* SBLanguages.m */; };
 		71FB5B521C16C64200C9E45D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71FB5B511C16C64200C9E45D /* Assets.xcassets */; };
 		71FB5B601C16C64200C9E45D /* avplayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B5F1C16C64200C9E45D /* avplayerTests.swift */; };
 		71FB5B6B1C16C64200C9E45D /* avplayerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5B6A1C16C64200C9E45D /* avplayerUITests.swift */; };
@@ -49,11 +53,13 @@
 		2C440058234D0D0000DC8E14 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2C4C58FF233FFBAA0069BCA3 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		2C4C5901233FFCF60069BCA3 /* OpenURLViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenURLViewController.swift; sourceTree = "<group>"; };
-		2C4C5902233FFCF60069BCA3 /* OpenURLView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenURLView.swift; sourceTree = "<group>"; };
 		2C6C1103234EAEF600565CA3 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
-		2C6C1105234EB06E00565CA3 /* PropertyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PropertyViewController.swift; sourceTree = "<group>"; };
+		2C6C1105234EB06E00565CA3 /* TracksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksViewController.swift; sourceTree = "<group>"; };
 		2C7652DC234E8E6B000E8248 /* ColorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorView.swift; sourceTree = "<group>"; };
+		2C77C6BD2364A6780033861C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/track_audio_format.plist; sourceTree = "<group>"; };
 		2C7F65BC233D215800EC6415 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		2C82E911235BAE5000BE1097 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2C82E917235BB07C00BE1097 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TracksViewController.storyboard; sourceTree = "<group>"; };
 		2C98B0CA2336EEFF005042B2 /* PlayerWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerWindow.swift; sourceTree = "<group>"; };
 		2C9B5118234BE84E00EBF905 /* Slider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Slider.h; path = "Objective-C/Slider.h"; sourceTree = "<group>"; };
 		2C9B5119234BE84E00EBF905 /* Tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tracker.h; path = "Objective-C/Tracker.h"; sourceTree = "<group>"; };
@@ -61,7 +67,11 @@
 		2C9B511B234BE84E00EBF905 /* Slider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Slider.m; path = "Objective-C/Slider.m"; sourceTree = "<group>"; };
 		2CA88FC9232C36DE0078CB20 /* avplayer_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = avplayer_Prefix.pch; path = avplayer/avplayer_Prefix.pch; sourceTree = "<group>"; };
 		2CAD48922342A8B9002ED2F8 /* Marker */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Marker; sourceTree = "<group>"; };
-		2CB8676123426955004B5B77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = avplayer/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2CB0427E235CA0E100DB8538 /* DictionaryKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictionaryKey.m; sourceTree = "<group>"; };
+		2CB0427F235CA0E100DB8538 /* DictionaryKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictionaryKey.h; sourceTree = "<group>"; };
+		2CB04284235CCBB800DB8538 /* AVTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVTrack.swift; sourceTree = "<group>"; };
+		2CBBE6242358FB1300FAD8FA /* SBLanguages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBLanguages.m; path = "Objective-C/SBLanguages.m"; sourceTree = "<group>"; };
+		2CBBE6262358FB1800FAD8FA /* SBLanguages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SBLanguages.h; path = "Objective-C/SBLanguages.h"; sourceTree = "<group>"; };
 		2CBEB66E233AE68C007A731D /* avplayer-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "avplayer-Bridging-Header.h"; path = "avplayer/avplayer-Bridging-Header.h"; sourceTree = "<group>"; };
 		71FB5B4A1C16C64200C9E45D /* avplayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = avplayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71FB5B4D1C16C64200C9E45D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +113,10 @@
 		2CF4955B2342A0DF00726471 /* Objective-C */ = {
 			isa = PBXGroup;
 			children = (
+				2CBBE6262358FB1800FAD8FA /* SBLanguages.h */,
+				2CBBE6242358FB1300FAD8FA /* SBLanguages.m */,
+				2CB0427F235CA0E100DB8538 /* DictionaryKey.h */,
+				2CB0427E235CA0E100DB8538 /* DictionaryKey.m */,
 				2C9B5118234BE84E00EBF905 /* Slider.h */,
 				2C9B511B234BE84E00EBF905 /* Slider.m */,
 				2C9B5119234BE84E00EBF905 /* Tracker.h */,
@@ -138,18 +152,20 @@
 			isa = PBXGroup;
 			children = (
 				2CF4955B2342A0DF00726471 /* Objective-C */,
-				2C4C5902233FFCF60069BCA3 /* OpenURLView.swift */,
 				2C7652DC234E8E6B000E8248 /* ColorView.swift */,
+				2CB04284235CCBB800DB8538 /* AVTrack.swift */,
 				2C7F65BC233D215800EC6415 /* PlayerView.swift */,
 				2C98B0CA2336EEFF005042B2 /* PlayerWindow.swift */,
 				2C4C5901233FFCF60069BCA3 /* OpenURLViewController.swift */,
-				2C6C1105234EB06E00565CA3 /* PropertyViewController.swift */,
+				2C6C1105234EB06E00565CA3 /* TracksViewController.swift */,
 				2C6C1103234EAEF600565CA3 /* SplitViewController.swift */,
 				2C4C58FF233FFBAA0069BCA3 /* PlayerViewController.swift */,
 				2C0A67D6232C3FAC00BC5270 /* PlayerWindowController.swift */,
 				71FB5B4D1C16C64200C9E45D /* AppDelegate.swift */,
 				71FB5B511C16C64200C9E45D /* Assets.xcassets */,
-				2CB8676023426955004B5B77 /* Main.storyboard */,
+				2C82E916235BB07C00BE1097 /* TracksViewController.storyboard */,
+				2C82E910235BAE5000BE1097 /* Main.storyboard */,
+				2C77C6BC2364A6780033861C /* track_audio_format.plist */,
 				71FB5B561C16C64200C9E45D /* Info.plist */,
 				2CAD48922342A8B9002ED2F8 /* Marker */,
 			);
@@ -236,6 +252,15 @@
 		71FB5B421C16C64200C9E45D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					DURATION,
+					ENABLED,
+					ID,
+					INFO,
+					In,
+					LANGUAGE,
+					NAME,
+				);
 				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = jhale;
@@ -283,10 +308,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C77C6BE2364A6780033861C /* track_audio_format.plist in Resources */,
 				2CAD48932342A8B9002ED2F8 /* Marker in Resources */,
 				71FB5B521C16C64200C9E45D /* Assets.xcassets in Resources */,
 				2C440059234D0D0000DC8E14 /* README.md in Resources */,
-				2CB8676223426955004B5B77 /* Main.storyboard in Resources */,
+				2C82E912235BAE5000BE1097 /* Main.storyboard in Resources */,
+				2C82E918235BB07C00BE1097 /* TracksViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,18 +338,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C6C1106234EB06E00565CA3 /* PropertyViewController.swift in Sources */,
+				2C6C1106234EB06E00565CA3 /* TracksViewController.swift in Sources */,
 				2C9B511C234BE84E00EBF905 /* Tracker.m in Sources */,
 				2C98B0CB2336EEFF005042B2 /* PlayerWindow.swift in Sources */,
+				2CB04285235CCBB800DB8538 /* AVTrack.swift in Sources */,
 				2C6C1104234EAEF600565CA3 /* SplitViewController.swift in Sources */,
 				2C7F65BD233D215900EC6415 /* PlayerView.swift in Sources */,
 				2C7F65FC233D5FF500EC6415 /* AppDelegate.swift in Sources */,
 				2C7652DD234E8E6B000E8248 /* ColorView.swift in Sources */,
 				2C4C5903233FFCF60069BCA3 /* OpenURLViewController.swift in Sources */,
 				2C0A67D7232C3FAC00BC5270 /* PlayerWindowController.swift in Sources */,
-				2C4C5904233FFCF60069BCA3 /* OpenURLView.swift in Sources */,
+				2CB04280235CA0E100DB8538 /* DictionaryKey.m in Sources */,
 				2C9B511D234BE84E00EBF905 /* Slider.m in Sources */,
 				2C4C5900233FFBAA0069BCA3 /* PlayerViewController.swift in Sources */,
+				2CBBE6252358FB1300FAD8FA /* SBLanguages.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,12 +387,28 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		2CB8676023426955004B5B77 /* Main.storyboard */ = {
+		2C77C6BC2364A6780033861C /* track_audio_format.plist */ = {
 			isa = PBXVariantGroup;
 			children = (
-				2CB8676123426955004B5B77 /* Base */,
+				2C77C6BD2364A6780033861C /* Base */,
+			);
+			name = track_audio_format.plist;
+			sourceTree = "<group>";
+		};
+		2C82E910235BAE5000BE1097 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C82E911235BAE5000BE1097 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2C82E916235BB07C00BE1097 /* TracksViewController.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C82E917235BB07C00BE1097 /* Base */,
+			);
+			name = TracksViewController.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -485,6 +530,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = CZ3N3VN6HQ;
 				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = avplayer/avplayer_Prefix.pch;
 				INFOPLIST_FILE = avplayer/Info.plist;
@@ -493,7 +539,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/jhale/Desktop/git_project/avplayer/avplayer/avplayer-Bridging-Header.h";
-				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 				SWIFT_VERSION = 5.0;
 				SYMROOT = build;
 			};
@@ -508,6 +554,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = CZ3N3VN6HQ;
 				ENABLE_HARDENED_RUNTIME = YES;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = avplayer/avplayer_Prefix.pch;
 				INFOPLIST_FILE = avplayer/Info.plist;
@@ -516,7 +563,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/jhale/Desktop/git_project/avplayer/avplayer/avplayer-Bridging-Header.h";
-				SWIFT_PRECOMPILE_BRIDGING_HEADER = NO;
+				SWIFT_PRECOMPILE_BRIDGING_HEADER = YES;
 				SWIFT_VERSION = 5.0;
 				SYMROOT = build;
 			};

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>fcc</key>
+		<string>&apos;unk &apos;</string>
+		<key>info</key>
+		<string>Unknown</string>
+	</dict>
+	<dict>
+		<key>fcc</key>
+		<string>&apos;lpcm&apos;</string>
+		<key>info</key>
+		<string>Linear PCM</string>
+	</dict>
+	<dict>
+		<key>fcc</key>
+		<string>&apos;lpcm&apos;</string>
+		<key>info</key>
+		<string>Linear PCM</string>
+	</dict>
+	<dict>
+		<key>fcc</key>
+		<string>&apos;ima4&apos;</string>
+		<key>info</key>
+		<string>Apple IMA4</string>
+	</dict>
+	<dict>
+		<key>fcc</key>
+		<string>&apos;aac &apos;</string>
+		<key>info</key>
+		<string>MPEG AAC</string>
+	</dict>
+	<dict>
+		<key>fcc</key>
+		<string>&apos;MAC3&apos;</string>
+		<key>info</key>
+		<string>MACE3</string>
+	</dict>
+	<dict>
+		<key>fcc</key>
+		<string>&apos;MAC6&apos;</string>
+		<key>info</key>
+		<string>MACE6</string>
+	</dict>
+	<dict>
+		<key>fcc</key>
+		<string>&apos;ulaw&apos;</string>
+		<key>info</key>
+		<string>Law</string>
+	</dict>
+	<dict>
+		<key>fcc</key>
+		<string>&apos;alaw&apos;</string>
+		<key>info</key>
+		<string>Law</string>
+	</dict>
+	<dict>
+		<key>fcc</key>
+		<string>&apos;.mp1&apos;</string>
+		<key>info</key>
+		<string>MPEG Layer 1</string>
+	</dict>
+	<dict>
+		<key>fcc</key>
+		<string>&apos;.mp2&apos;</string>
+		<key>info</key>
+		<string> MPEG Layer 2</string>
+	</dict>
+	<dict>
+		<key>fcc</key>
+		<string>&apos;.mp3&apos;</string>
+		<key>info</key>
+		<string> MPEG Layer 3</string>
+	</dict>
+	<dict>
+		<key>fcc</key>
+		<string>&apos;alac&apos;</string>
+		<key>info</key>
+		<string>Apple Lossless</string>
+	</dict>
+</array>
+</plist>

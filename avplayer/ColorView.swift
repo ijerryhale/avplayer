@@ -34,5 +34,5 @@ class ColorView: NSView
         NSBezierPath(rect:bounds).fill()
      }
     
-    override func awakeFromNib() { super.awakeFromNib(); print("ColorView awakeFromNib") }
+    //  override func awakeFromNib() { super.awakeFromNib(); print("ColorView awakeFromNib") }
 }

@@ -27,10 +27,6 @@ import AVFoundation
 
 private var VIEW_CONTROLLER_KVOCONTEXT = 0
 private var CURRENT_TIME_KVOCONTEXT = 0
-private let LAYER_BACK_COLOR = "KeyLayerBackgroundColor"
-
-private let scrubberLeftAnchor:CGFloat = 40.0
-private let scrubberWidthAnchor:CGFloat = 294.0
 
 class PlayerViewController: NSViewController
 {
@@ -47,7 +43,7 @@ class PlayerViewController: NSViewController
     @IBOutlet weak var frameRateText: NSTextField!
     @IBOutlet weak var currentSizeText: NSTextField!
 
-    @objc var scrubberSlider = Slider.init(frame: NSMakeRect(scrubberLeftAnchor, 36.0, scrubberWidthAnchor, 24.0))
+    @objc var scrubberSlider = Slider.init(frame: NSMakeRect(SCRUBBER_LEFT_ANCHOR, 36.0, SCRUBBER_WIDTH_ANCHOR, 24.0))
     @objc dynamic var currentTime:Double = 0.0
     @objc let player = AVPlayer()
 
@@ -244,8 +240,8 @@ class PlayerViewController: NSViewController
     { super.viewWillAppear(); print("PlayerViewController viewWillAppear")
         //  set scrubberSlider Constraints
         scrubberSlider!.translatesAutoresizingMaskIntoConstraints = false
-        scrubberSlider!.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:scrubberLeftAnchor).isActive = true
-        scrubberSlider!.widthAnchor.constraint(equalToConstant: scrubberWidthAnchor).isActive = true
+        scrubberSlider!.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:SCRUBBER_LEFT_ANCHOR).isActive = true
+        scrubberSlider!.widthAnchor.constraint(equalToConstant: SCRUBBER_WIDTH_ANCHOR).isActive = true
         
         if USE_DEFAULT_MOV { playPauseBtn.title = "Pause"; player.play() }
         else { playPauseBtn.title = "Play" }
@@ -259,6 +255,13 @@ class PlayerViewController: NSViewController
     override func viewDidLoad()
     { super.viewDidLoad(); print("PlayerViewController viewDidLoad")
 
+        //  set up playerView Constraints
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.addConstraint(NSLayoutConstraint(item: view, attribute: .height,
+                        relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .height,
+                        multiplier: 1.0, constant: PLAYER_VIEW_HGHT / 2.0))
+        
+        //  error label Constraints
         noVideoLabel.translatesAutoresizingMaskIntoConstraints = false
         unplayableLabel.translatesAutoresizingMaskIntoConstraints = false
         noVideoLabel.centerXAnchor.constraint(equalTo: playerView.centerXAnchor).isActive = true
@@ -266,6 +269,7 @@ class PlayerViewController: NSViewController
         unplayableLabel.centerXAnchor.constraint(equalTo: playerView.centerXAnchor).isActive = true
         unplayableLabel.centerYAnchor.constraint(equalTo: playerView.centerYAnchor).isActive = true
 
+        //  set up PlayerLayer
         playerLayer = AVPlayerLayer(player: player)
 
         playerLayer.videoGravity = .resizeAspect
@@ -275,6 +279,7 @@ class PlayerViewController: NSViewController
         playerView.wantsLayer = true
         playerView.layer?.addSublayer(playerLayer)
 
+        //  set up Slider
         scrubberSlider!.autoresizingMask = [.minXMargin]
         scrubberSlider!.minValue = 0.0
         scrubberSlider!.maxValue = 0.0
@@ -287,6 +292,7 @@ class PlayerViewController: NSViewController
         
         view.addSubview(scrubberSlider!)
 
+        //  get PlayerView back color prefs
         let prefs = UserDefaults.standard.data(forKey: LAYER_BACK_COLOR)
          
         if prefs == nil   //    first app launch
@@ -319,15 +325,15 @@ class PlayerViewController: NSViewController
             
             if !self.smpteTime.isHidden
             {
-                let time = Float(CMTimeGetSeconds((self.player.currentItem?.currentTime())!))
+                let time = Float(CMTimeGetSeconds(self.player.currentItem?.currentTime() ?? CMTime.zero))
                 let frame = Int(time * self.frameRate)
                 let FF = Int(Float(frame).truncatingRemainder(dividingBy: self.frameRate))
                 let seconds = Int(Float(frame - FF) / self.frameRate)
                 let SS = seconds % 60
                 let MM = (seconds % 3600) / 60
                 let HH = seconds / 3600
-                
-                 self.smpteTime.stringValue = [String(format: "%02d", HH), String(format: "%02d", MM), String(format: "%02d", SS), String(format: "%02d", FF)].joined(separator: ":")
+
+                self.smpteTime.stringValue = String(format: "%02i:%02i:%02i:%02i", HH, MM, SS, FF)
             }
         
         } as AnyObject
@@ -364,8 +370,8 @@ class PlayerViewController: NSViewController
         addObserver(self, forKeyPath: #keyPath(PlayerViewController.player.currentItem.duration), options: [.new, .initial], context: &VIEW_CONTROLLER_KVOCONTEXT)
         addObserver(self, forKeyPath: #keyPath(PlayerViewController.player.currentItem.status), options: [.new, .initial], context: &VIEW_CONTROLLER_KVOCONTEXT)
 
-        //  Time Code display
-        NotificationCenter.default.addObserver(self, selector: #selector(self.toggleTimeCodeDisplay),
+        ////    toggleTimeCodeDisplay()
+        NotificationCenter.default.addObserver(self, selector: #selector(toggleTimeCodeDisplay),
                                                name: Notification.Name(rawValue: NOTIF_TOGGLETIMECODEDISPLAY), object: nil)
 
     }

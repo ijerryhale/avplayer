@@ -23,13 +23,8 @@
 */
 
 #ifdef __OBJC__
-    #import <Cocoa/Cocoa.h>
-    #import <Foundation/Foundation.h>
-    #include <Quartz/Quartz.h>
 
-	#define BACKGROUND_QUEUE dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-
-    #define	WIDTH	18
+#define BACKGROUND_QUEUE dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
 
 #ifdef DEBUG
   #define MCRelease(x) [x release]
@@ -46,7 +41,16 @@
 
 #define ZAssert(condition, ...) do { if (!(condition)) { ALog(__VA_ARGS__); }} while(0)
 
-#endif
+#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
+#include <Quartz/Quartz.h>
+#include <AVFoundation/AVFoundation.h>
+
+#import "SBLanguages.h"
+
+#import "DictionaryKey.h"
 
 #import "Tracker.h"
 #import "Slider.h"
+
+#endif

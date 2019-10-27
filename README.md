@@ -25,8 +25,7 @@ So, maybe not as simple as it started out to be.
 <br>
 QuickTime Player Pro 7 stops working with Mac OS Catalina so we thought we'd have some fun.
 
-![marquee](https://cormya.com/avplayer-4.png "AVPlayer")
-
+![marquee](https://cormya.com/avplayer-5.png "AVPlayer")
 
 ## Requirements
 
@@ -34,48 +33,9 @@ QuickTime Player Pro 7 stops working with Mac OS Catalina so we thought we'd hav
 - Mac OS 10.14+
 - Swift 5+
 
-## September 12, 2019
+## October 27, 2019
 
-•   Initial commit
-
-## September 13, 2019
-
-•   Add code to handle Full Screen Window and Window size and position persistence
-
-## September 25, 2019
-
-•   Delete repository and recreate
-<br>
-<br>
-•   Convert some Objective-C code to Swift, and add full WindowController
-
-## September 30, 2019
-
-•   Delete repository and recreate (again)
-<br>
-<br>
-•   Add Drag and Drop on PlayerView, Open File, and Open URL
-
-## October 7, 2019
-
-•   Fix a lot of bugs
-<br>
-<br>
-•   Add Objective-C Slider code. This implementation adds a custom UI object that is written in Objective-C code and because Swift cannot bridge Objective-C optional types the Slider is created programatically
-
-## October 9, 2019
-
-•   Move AVAsset to PlayerWindowController
-<br>
-<br>
-•   Fix bug in PlayerView Drag & Drop
-<br>
-<br>
-•   Add support for creating Trimmed Movies
-
-## October 12, 2019
-
-•   Add support for displaying Media Characteristics
+•	Add some functionality to TracksViewController
 
 ## Contact
 
