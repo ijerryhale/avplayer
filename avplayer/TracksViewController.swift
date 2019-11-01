@@ -29,6 +29,10 @@ class CheckBoxTableCellView : NSTableCellView
 {
     @IBOutlet weak var checkbox: NSButton!
     
+    @IBAction func isEnabledClicked(_ sender: NSButton)
+    {
+        print("isEnabledClicked")
+    }
 }
 
 //    #pragma mark -
@@ -45,26 +49,9 @@ class TracksViewController: NSViewController
         static let INFO = "INFO"
     }
 
-    struct Track
-    {
-        var ID : String
-        var ISENABLED : Bool
-        var NAME : String
-        var DURATION : String
-        var LANGUAGE : String
-        var INFO : String
-    }
-    
-   // var track : [Track]?
-    
     var track : [AVTrack]?
 
     @IBOutlet weak var tableView: NSTableView!
-    
-    @IBAction func isEnabledClicked(_ sender: NSButton)
-    {
-        //  let thisrow = tableView.row(for: sender)
-    }
 
     //  MARK: @objc
     @objc func refreshTrackData(_ notification: Notification)
