@@ -345,6 +345,17 @@
     [self enableTrackers];
 }
 
+-(void)resetMarkers
+{
+    _markerScrub.value = 0.0;
+    _markerStart.value = 0.0;
+    _markerEnd.value = 0.0;
+    
+    _markerScrub.contents = _markerScrub.offImg;
+    _markerStart.contents = _markerStart.offImg;
+    _markerEnd.contents = _markerEnd.offImg;
+}
+
 -(void)selectMarker:(_marker *)marker
 {
 	marker.contents = marker.onImg;

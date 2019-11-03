@@ -40,7 +40,6 @@ extern NSString *NOTIF_TOGGLETIMECODEDISPLAY;
 extern NSString *WINDOW_FRAME;
 extern NSString *LAYER_BACK_COLOR;
 
-
 extern bool USE_DEFAULT_MOV;
 
 NSString *langForTrack(AVAssetTrack *track);

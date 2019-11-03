@@ -104,6 +104,7 @@
 - (double)endMarker;
 - (void)setEndMarker:(double)value;
 
+-(void)resetMarkers;
 - (void)selectMarker:(_marker *)marker;
 
 @end

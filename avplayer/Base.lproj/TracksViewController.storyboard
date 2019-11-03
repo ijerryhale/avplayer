@@ -87,7 +87,7 @@
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
                                                                     <connections>
-                                                                        <action selector="isEnabledClicked:" target="s4X-7R-O0g" id="Gw4-xo-aQA"/>
+                                                                        <action selector="isEnabledClicked:" target="K92-z1-rvS" id="4eS-bx-ZRJ"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -97,7 +97,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="NAME" editable="NO" width="120" minWidth="120" maxWidth="120" id="iho-sD-GnT">
+                                                <tableColumn identifier="NAME" width="120" minWidth="120" maxWidth="120" id="iho-sD-GnT">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center" title="Name">
                                                         <font key="font" metaFont="menu" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -110,14 +110,14 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="NAME" id="Qph-gE-fnJ" customClass="CheckBoxTableCellView" customModule="avplayer" customModuleProvider="target">
+                                                        <tableCellView identifier="NAME" id="vjL-NS-h12">
                                                             <rect key="frame" x="101" y="1" width="120" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jl9-Wu-OHL">
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VbM-hO-jdX">
                                                                     <rect key="frame" x="0.0" y="0.0" width="120" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" id="kME-XV-ojD">
+                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" id="73c-1H-qaX">
                                                                         <font key="font" metaFont="label" size="12"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -125,7 +125,7 @@
                                                                 </textField>
                                                             </subviews>
                                                             <connections>
-                                                                <outlet property="textField" destination="jl9-Wu-OHL" id="M6K-DX-LC1"/>
+                                                                <outlet property="textField" destination="VbM-hO-jdX" id="lSQ-bs-mJ2"/>
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>

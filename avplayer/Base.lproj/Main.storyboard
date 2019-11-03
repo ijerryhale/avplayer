@@ -70,9 +70,9 @@
                                                 <action selector="doOpenFile:" target="Ady-hI-5gd" id="E2j-rK-k8t"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Open URL…" keyEquivalent="u" id="BQB-FY-k3x">
+                                        <menuItem title="Open URL…" keyEquivalent="o" id="YtG-Wd-0kc" userLabel="Open URL…">
                                             <connections>
-                                                <action selector="doOpenURL:" target="Voe-Tx-rLC" id="c04-hs-WJg"/>
+                                                <action selector="doOpenURL:" target="Ady-hI-5gd" id="qEF-e9-rfk"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Open Recent" id="FvE-rt-oPw">
@@ -88,11 +88,19 @@
                                                 </items>
                                             </menu>
                                         </menuItem>
-                                        <menuItem title="Create Trimmed MOV..." enabled="NO" id="tXI-mr-wws" userLabel="Create Trimmed MOV...">
+                                        <menuItem title="Create Movie Clip..." enabled="NO" id="tXI-mr-wws" userLabel="Create Movie Clip...">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="doCreateTrimmedMOV:" target="Ady-hI-5gd" id="zMn-ze-IEy"/>
-                                                <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.isLocalAsset" id="CCw-VO-srE"/>
+                                                <action selector="doCreateMovieClip:" target="Ady-hI-5gd" id="c3T-Wl-RV1"/>
+                                                <binding destination="Voe-Tx-rLC" name="enabled2" keyPath="self.isLocalAsset" previousBinding="oeU-Mn-DRd" id="LuV-tL-pgv">
+                                                    <dictionary key="options">
+                                                        <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                                        <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                                        <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                                        <integer key="NSNullPlaceholder" value="-1"/>
+                                                    </dictionary>
+                                                </binding>
+                                                <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.hasValidAsset" id="oeU-Mn-DRd"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Close" enabled="NO" keyEquivalent="w" id="DVo-aG-piG">
@@ -921,7 +929,7 @@ IA
         <scene sceneID="fhZ-He-u9z">
             <objects>
                 <windowController storyboardIdentifier="OpenURLWindowController" showSeguePresentationStyle="single" id="cuS-68-ZbM" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="W0E-vh-iTd">
+                    <window key="window" title="Open URL" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="W0E-vh-iTd">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" topStrut="YES"/>
                         <rect key="contentRect" x="679" y="661" width="572" height="117"/>

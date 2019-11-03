@@ -37,6 +37,11 @@ QuickTime Player Pro 7 stops working with Mac OS Catalina so we thought we'd hav
 
 •	Add some functionality to TracksViewController
 
+## November 3, 2019
+
+•	Re-write video trimming function using AVMutableMovie
+
+
 ## Contact
 
 - [Linkedin][2]

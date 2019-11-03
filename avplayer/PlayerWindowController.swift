@@ -39,154 +39,141 @@ class PlayerWindowController : NSWindowController
     
     private static let assetKeysRequiredToPlay = [ "playable", "hasProtectedContent"]
  
-    @IBAction func doCreateTrimmedMOV(_ sender: Any)
+    @IBAction func doCreateMovieClip(_ sender: Any)
      {
-        let savePanel = NSSavePanel()
-        let movDir = FileManager.default.urls(for: .moviesDirectory, in: .userDomainMask)
+        if let mutableAsset = self.asset as? AVMutableMovie
+        {
+            let pathExt = mutableAsset.url!.pathExtension
+            let savePanel = NSSavePanel()
+            let movDir = FileManager.default.urls(for: .moviesDirectory, in: .userDomainMask)
 
-        savePanel.title = "Save Movie As"
-        savePanel.canCreateDirectories = false
-        
-        savePanel.allowedFileTypes = ["mp4", "mov", "MOV", "m4v", "M4V"]
-        savePanel.directoryURL = movDir[0]
+            savePanel.title = "Save Movie As"
+            savePanel.canCreateDirectories = false
+            
+            savePanel.allowedFileTypes = expectedExt
+            savePanel.directoryURL = movDir[0]
+            savePanel.nameFieldStringValue = "Untitled." + pathExt
 
-        savePanel.beginSheetModal(for:self.window!)
-        { (response) in
+            savePanel.beginSheetModal(for:self.window!)
+            { (response) in
 
-            if response == .OK
-            {
-                if let url:URL = savePanel.url
+                if response == .OK
                 {
-                    //  https://gist.github.com/acj/b8c5f8eafe0605a38692
-                    typealias TrimCompletion = (Error?) -> ()
-                    typealias TrimPoints = [(CMTime, CMTime)]
-        
-                    func trimVideo(_ sourceURL: URL, destinationURL: URL, trimPoints: TrimPoints, completion: TrimCompletion?)
+                    if let url:URL = savePanel.url
                     {
-                        assert(sourceURL.isFileURL)
-                        assert(destinationURL.isFileURL)
-        
-                        func removeFileAtURLIfExists(url: NSURL)
+                        typealias TrimCompletion = (Error?) -> ()
+                        typealias TrimPoints = [(CMTime, CMTime)]
+            
+                        func createMovieClip(_ asset: AVAsset, destinationURL: URL, trimPoints: TrimPoints, completion: TrimCompletion?)
                         {
-                            if let filePath = url.path
+                            func removeFileAtURLIfExists(url: NSURL)
                             {
-                                let fileManager = FileManager.default
-        
-                                if fileManager.fileExists(atPath: filePath)
+                                if let filePath = url.path
                                 {
-                                    do { try fileManager.removeItem(atPath: filePath) }
-                                    catch { print("Couldn't remove existing destination file: \(error)") }
+                                    let fileManager = FileManager.default
+            
+                                    if fileManager.fileExists(atPath: filePath)
+                                    {
+                                        do { try fileManager.removeItem(atPath: filePath) }
+                                        catch { print("createMovieClip: Couldn't remove existing destination file: \(error)") }
+                                    }
                                 }
                             }
-                        }
-        
-                        func verifyPresetForAsset(preset: String, asset: AVAsset) -> Bool
-                        {
-                            let compatiblePresets = AVAssetExportSession.exportPresets(compatibleWith: asset)
-                            let filteredPresets = compatiblePresets.filter { $0 == preset }
-        
-                            return (filteredPresets.count > 0 || preset == AVAssetExportPresetHighestQuality)
-                        }
-        
-                        let options = [ AVURLAssetPreferPreciseDurationAndTimingKey: true ]
-                        let asset = AVURLAsset(url: sourceURL, options: options)
-                        let preferredPreset = AVAssetExportPresetHighestQuality
-        
-                        if verifyPresetForAsset(preset: preferredPreset, asset: asset)
-                        {
-                            let composition = AVMutableComposition()
-        
-                            guard
-                                let videoCompTrack = composition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: CMPersistentTrackID()),
-                                let audioCompTrack = composition.addMutableTrack(withMediaType: AVMediaType.audio, preferredTrackID: CMPersistentTrackID())
-                            else
+                            
+                            func verifyPresetForAsset(preset: String, asset: AVAsset) -> Bool
                             {
-                                let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "Couldn't add mutable tracks"])
-                                completion?(error)
-                                return
+                                let compatiblePresets = AVAssetExportSession.exportPresets(compatibleWith: asset)
+                                let filteredPresets = compatiblePresets.filter { $0 == preset }
+            
+                                return (filteredPresets.count > 0 || preset == AVAssetExportPresetHighestQuality)
                             }
-        
-                            guard
-                                let assetVideoTrack = asset.tracks(withMediaType: AVMediaType.video).first,
-                                let assetAudioTrack = asset.tracks(withMediaType: AVMediaType.audio).first
-                            else
+            
+                            let preferredPreset = AVAssetExportPresetHighestQuality
+            
+                            if verifyPresetForAsset(preset: preferredPreset, asset: asset)
                             {
-                                self.playerViewController?.noVideoLabel.isHidden = false
-        
-                                let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "Couldn't find video or audio track in source asset"])
-                                completion?(error)
-                                return
-                            }
-        
-                            //  preserve the orientation of the source asset
-                            videoCompTrack.preferredTransform = assetVideoTrack.preferredTransform
-        
-                            var accumulatedTime = CMTime.zero
-                            for (startTimeForCurrentSlice, endTimeForCurrentSlice) in trimPoints
-                            {
-                                let durationOfCurrentSlice = CMTimeSubtract(endTimeForCurrentSlice, startTimeForCurrentSlice)
-                                let timeRangeForCurrentSlice = CMTimeRangeMake(start: startTimeForCurrentSlice, duration: durationOfCurrentSlice)
+                                removeFileAtURLIfExists(url: destinationURL as NSURL)
+                                
+                                let movieClip = AVMutableMovie()
+                                movieClip.defaultMediaDataStorage = AVMediaDataStorage(url: destinationURL)
+                                
+                                //  now only vaguely based upon:
+                                //  https://gist.github.com/acj/b8c5f8eafe0605a38692
+                                var accumulatedTime = CMTime.zero
+                                for (startTimeForCurrentSlice, endTimeForCurrentSlice) in trimPoints
+                                {
+                                    let durationOfCurrentSlice = CMTimeSubtract(endTimeForCurrentSlice, startTimeForCurrentSlice)
+                                    let timeRangeForCurrentSlice = CMTimeRangeMake(start: startTimeForCurrentSlice, duration: durationOfCurrentSlice)
+                                    do
+                                    {
+                                        try movieClip.insertTimeRange(timeRangeForCurrentSlice, of: asset, at: accumulatedTime, copySampleData: true)
+                                    }
+                                    catch
+                                    {
+                                        let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "createMovieClip: Couldn't insert time ranges: \(error)"])
+                                        completion?(error)
+                                        return
+                                    }
+
+                                    accumulatedTime = CMTimeAdd(accumulatedTime, durationOfCurrentSlice)
+                                }
+     
                                 do
                                 {
-                                    try videoCompTrack.insertTimeRange(timeRangeForCurrentSlice, of: assetVideoTrack, at: accumulatedTime)
-                                    try audioCompTrack.insertTimeRange(timeRangeForCurrentSlice, of: assetAudioTrack, at: accumulatedTime)
+                                    //  case "mov":
+                                    //  case "MOV":
+                                    var fileType:AVFileType = .mov
+                                    
+                                    switch pathExt
+                                    {
+                                        case "M4V", "m4v":
+                                            fileType = .m4v
+                                        break
+                                        default:
+                                            fileType = .mp4
+                                        break
+                                    }
+        
+                                    try movieClip.writeHeader(to: destinationURL, fileType: fileType, options: .addMovieHeaderToDestination)
                                 }
                                 catch
                                 {
-                                    let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "Couldn't insert time ranges: \(error)"])
+                                    let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "createMovieClip: Couldn't writeHeader: \(error)"])
                                     completion?(error)
                                     return
                                 }
-        
-                                accumulatedTime = CMTimeAdd(accumulatedTime, durationOfCurrentSlice)
                             }
-        
-                            guard let exportSession = AVAssetExportSession(asset: composition, presetName: preferredPreset)
-                            else
-                            {
-                                let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "Couldn't create export session"])
-                                completion?(error)
-                                return
-                            }
-        
-                            exportSession.outputURL = destinationURL
-                            exportSession.outputFileType = AVFileType.mp4
-                            exportSession.shouldOptimizeForNetworkUse = true
-        
-                            removeFileAtURLIfExists(url: destinationURL as NSURL)
-        
-                            exportSession.exportAsynchronously(completionHandler: { completion?(exportSession.error) })
                         }
-                        else
+                        
+                        let start:Float64 = (self.playerViewController?.scrubberSlider!.markerStart.value)!
+                        let end:Float64 = (self.playerViewController?.scrubberSlider!.markerEnd.value)!
+        
+                        if end != 0 && end != start
                         {
-                            let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "Could not find a suitable export preset for the input video"])
-                            if let completion = completion { completion(error); return }
-                        }
-                    }
-                    
-                    let start:Float64 = (self.playerViewController?.scrubberSlider!.markerStart.value)!
-                    let end:Float64 = (self.playerViewController?.scrubberSlider!.markerEnd.value)!
-    
-                    if end != 0 && end != start
-                    {
-                        let trimPoints = [(CMTimeMakeWithSeconds(start, preferredTimescale: 10000), CMTimeMakeWithSeconds(end, preferredTimescale: 10000))]
-    
-                        trimVideo(self.asset!.url, destinationURL: url, trimPoints: trimPoints)
-                        { error in
-                            if let error = error
-                            { handleErrorWithMessage("Failure:createTrimmedMov", error: error) }
-                            else { print("Success") }
+                            assert((mutableAsset.url!.isFileURL))
+                            assert(url.isFileURL)
+                            
+                            let trimPoints = [(CMTimeMakeWithSeconds(start, preferredTimescale: 10000), CMTimeMakeWithSeconds(end, preferredTimescale: 10000))]
+        
+                            createMovieClip(self.asset!, destinationURL: url, trimPoints: trimPoints)
+                            { error in
+                                if let error = error
+                                { handleErrorWithMessage("Failure:createClip", error: error) }
+                                else { print("Success") }
+                            }
                         }
                     }
                 }
+                
+                savePanel.close()
             }
-            
-            savePanel.close()
         }
     }
 
      @IBAction func doOpenFile(_ sender: Any)
      {
+        (NSApplication.shared.delegate as! AppDelegate).hasValidAsset = false
+        
         let openPanel = NSOpenPanel()
 
         openPanel.canChooseFiles = true
@@ -202,6 +189,8 @@ class PlayerWindowController : NSWindowController
             {
                 if let url:URL = openPanel.url
                 {
+                    (NSApplication.shared.delegate as! AppDelegate).isLocalAsset = true
+                    
                     ////    we're just notifying ourselves here
                     ////    openFile(notification: Notification)
                     NotificationCenter.default.post(name: Notification.Name(rawValue: NOTIF_OPENFILE), object: url)
@@ -210,9 +199,9 @@ class PlayerWindowController : NSWindowController
             
             openPanel.close()
          }
-     }
-    
-    var asset: AVURLAsset?
+    }
+
+    var asset: AVAsset?
     {
         didSet
         {
@@ -232,14 +221,25 @@ class PlayerWindowController : NSWindowController
 
         if let url:URL = notification.object as? URL
         {
-            //  print(url.absoluteString)
-            asset = AVURLAsset(url: url , options: nil)
+            if url.isFileURL
+            {
+                (NSApplication.shared.delegate as! AppDelegate).isLocalAsset = true
+                NSDocumentController.shared.noteNewRecentDocumentURL(url)
+                
+                asset = AVMutableMovie(url: url, options: nil)
+            }
+            else
+            {
+                (NSApplication.shared.delegate as! AppDelegate).isLocalAsset = false
+            
+                asset = AVURLAsset(url: url, options: nil)
+            }
         }
     }
 
     //  fill in some of the assorted text
     //  values in the PlayerViewController
-    func assignMediaCharacteristics(_ newAsset: AVURLAsset?)
+    func assignMediaCharacteristics(_ newAsset: AVAsset?)
     {   //  estimatedDataRate
         guard
             let tracks = newAsset?.tracks(withMediaType: .video)
@@ -286,7 +286,7 @@ class PlayerWindowController : NSWindowController
         }
     }
 
-    func asynchronouslyLoadURLAsset(_ newAsset: AVURLAsset)
+    func asynchronouslyLoadURLAsset(_ newAsset: AVAsset)
     {
         //  using AVAsset now runs the risk of blocking
         //  the current thread (the main UI thread) whilst
@@ -301,7 +301,7 @@ class PlayerWindowController : NSWindowController
             //  our handler to the main queue
             DispatchQueue.main.async
             {
-                //  self.asset` has already changed
+                //  self.asset has already changed
                 //  no point continuing because
                 //  another `newAsset` will come along in a moment.
                 guard newAsset == self.asset else { return }
@@ -342,16 +342,11 @@ class PlayerWindowController : NSWindowController
                 self.playerViewController?.playerItem = AVPlayerItem(asset: newAsset)
                 self.playerViewController?.frameRate
                     = self.playerViewController?.player.currentItem?.asset.tracks[0].nominalFrameRate ?? 0.0
-                //  if this is a local file
-                if self.asset!.url.isFileURL
-                {
-                    (NSApplication.shared.delegate as! AppDelegate).isLocalAsset = true
-                    NSDocumentController.shared.noteNewRecentDocumentURL(self.asset!.url)
-                }
-                else { (NSApplication.shared.delegate as! AppDelegate).isLocalAsset = false }
-                
+              
                 self.assignMediaCharacteristics(newAsset)
-                
+
+                (NSApplication.shared.delegate as! AppDelegate).hasValidAsset = true
+
                 NotificationCenter.default.post(name: Notification.Name(rawValue: NOTIF_NEW_ASSET), object: self.asset)
             }
         }
@@ -360,15 +355,15 @@ class PlayerWindowController : NSWindowController
     //  MARK: overrides
     override func windowDidLoad()
     { super.windowDidLoad(); print("PlayerWindowController windowDidLoad")
-
+        
         if USE_DEFAULT_MOV
         {
-            //  let url = URL(fileURLWithPath:"/Users/jhale/Desktop/30fps_video_sample.mp4")
-            let url = URL(string: "https://cormya.com/the-addams-family-trailer-2_h.480.mov")
-            asset = AVURLAsset(url: url! , options: nil)
+             //  let url = URL(fileURLWithPath:"/Users/jhale/Desktop/30fps_video_sample.mp4")
+             let url = URL(string: "https://cormya.com/the-addams-family-trailer-2_h.480.mov")
+             asset = AVURLAsset(url: url! , options: nil)
             
-            (NSApplication.shared.delegate as! AppDelegate).isLocalAsset = false
-        }
+             (NSApplication.shared.delegate as! AppDelegate).isLocalAsset = false
+         }
     }
 
     override func awakeFromNib()
@@ -486,14 +481,14 @@ extension PlayerWindowController : NSWindowDelegate
     
     func windowWillClose(_ notification: Notification)
     {
-        NotificationCenter.default.removeObserver(self,
-                            name: Notification.Name(rawValue: NOTIF_OPENFILE), object: nil)
+         // NotificationCenter.default.removeObserver(self,
+         //                   name: Notification.Name(rawValue: NOTIF_OPENFILE), object: nil)
 
         guard let frame = window?.frame else { return }
         
         do
         {
-             let data = try NSKeyedArchiver.archivedData(withRootObject: frame, requiringSecureCoding: false)
+            let data = try NSKeyedArchiver.archivedData(withRootObject: frame, requiringSecureCoding: false)
              UserDefaults.standard.set(data, forKey: WINDOW_FRAME)
         } catch { print("NSKeyedArchiver.archivedData error") }
     }

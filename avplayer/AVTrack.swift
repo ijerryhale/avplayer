@@ -64,23 +64,20 @@ class TrackAudioFormat
 //  MARK: AVTrack
 class AVTrack: NSObject
 {
-    var mediaType:AVMediaType
-    var trackID:CMPersistentTrackID
+    var assetTrack:AVAssetTrack
     var trackInfo:TrackInfo
-    var language:String
-    var isEnabled:Bool
-    var formatDesc:[CMFormatDescription]    
-    var duration:CMTime
+    
+    var mediaType: AVMediaType { get { return (assetTrack.mediaType) } }
+    var trackID: CMPersistentTrackID { get { return (assetTrack.trackID) } }
+    var isEnabled: Bool { get { return (assetTrack.isEnabled) } }
+    var duration: CMTime { get { return (assetTrack.timeRange.duration) } }
+    var language: String { get { return (langForTrack(assetTrack)) } }
+    var formatDesc: CMFormatDescription { get { return (assetTrack.formatDescriptions[0] as! CMFormatDescription) } }
     
     init(_ track: AVAssetTrack)
     {
-        mediaType = track.mediaType
-        trackID = track.trackID
+        assetTrack = track
         trackInfo = TrackInfo(name: "", info: "")
-        language = langForTrack(track)
-        isEnabled = track.isEnabled
-        formatDesc = track.formatDescriptions as! [CMFormatDescription]
-        duration = track.timeRange.duration
     }
 }
 
@@ -98,10 +95,10 @@ class AVTrackVideo: AVTrack
         frameRate = track.nominalFrameRate
         trackInfo.name = "Video Track"
 
-        if let colorBits = CMFormatDescriptionGetExtension(formatDesc[0], extensionKey: kCMFormatDescriptionExtension_Depth)
+        if let colorBits = CMFormatDescriptionGetExtension(formatDesc, extensionKey: kCMFormatDescriptionExtension_Depth)
         { trackInfo.info = "\(colorBits)-bit, " }
 
-        if let formatName = CMFormatDescriptionGetExtension(formatDesc[0], extensionKey: kCMFormatDescriptionExtension_FormatName)
+        if let formatName = CMFormatDescriptionGetExtension(formatDesc, extensionKey: kCMFormatDescriptionExtension_FormatName)
         {
             var codecText:String = ""
             switch formatName as! String
@@ -126,7 +123,7 @@ class AVTrackVideo: AVTrack
             trackInfo.info += "\(codecText), "
         }
         
-        let dimension =  CMVideoFormatDescriptionGetDimensions(formatDesc[0])
+        let dimension =  CMVideoFormatDescriptionGetDimensions(formatDesc)
         
         trackInfo.info += "\(dimension.width) x \(dimension.height)"
      }
@@ -149,7 +146,7 @@ class AVTrackAudio: AVTrack
         var basicInfo:String = ""
 
         //  get ASBC
-        if let basicDesc:UnsafePointer<AudioStreamBasicDescription> = CMAudioFormatDescriptionGetStreamBasicDescription(formatDesc[0])
+        if let basicDesc:UnsafePointer<AudioStreamBasicDescription> = CMAudioFormatDescriptionGetStreamBasicDescription(formatDesc)
         {
             let bd = basicDesc.pointee
             
@@ -192,7 +189,7 @@ class AVTrackAudio: AVTrack
 
         //  if there is a channel layout
         //  try to get the channel name
-        if let channelLayoutPtr:UnsafePointer<AudioChannelLayout> = CMAudioFormatDescriptionGetChannelLayout(formatDesc[0], sizeOut: &aclSize)
+        if let channelLayoutPtr:UnsafePointer<AudioChannelLayout> = CMAudioFormatDescriptionGetChannelLayout(formatDesc, sizeOut: &aclSize)
         {
             //  print(channelLayout.pointee)
             var nameSize:UInt32 = 0

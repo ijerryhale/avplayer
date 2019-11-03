@@ -29,14 +29,9 @@ class CheckBoxTableCellView : NSTableCellView
 {
     @IBOutlet weak var checkbox: NSButton!
     
-    @IBAction func isEnabledClicked(_ sender: NSButton)
-    {
-        print("isEnabledClicked")
-    }
 }
 
-//    #pragma mark -
-//    #pragma mark TracksViewController
+//    MARK: TracksViewController
 class TracksViewController: NSViewController
 {
     struct CellIdent
@@ -53,11 +48,20 @@ class TracksViewController: NSViewController
 
     @IBOutlet weak var tableView: NSTableView!
 
+    @IBAction func isEnabledClicked(_ sender: NSButton)
+    {
+//        let t = track![sender.tag].assetTrack as! AVMutableMovieTrack
+//
+//        t.isEnabled = !t.isEnabled
+//
+//        print(t.isEnabled)
+    }
+    
     //  MARK: @objc
     @objc func refreshTrackData(_ notification: Notification)
     {
         //  AVAssetTrack
-        if let asset = notification.object as? AVURLAsset
+        if let asset = notification.object as? AVAsset
         {
             track = [AVTrack]()
             
@@ -104,7 +108,6 @@ class TracksViewController: NSViewController
     //  override func awakeFromNib() { }
     //  override func viewWillAppear()
     //  { super.viewWillAppear(); print("TracksViewController viewWillAppear") }
-    
     override func viewDidLoad()
     {
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -118,10 +121,11 @@ class TracksViewController: NSViewController
     }
 }
 
+//    MARK: NSTableViewDelegate, NSTableViewDataSource
 extension TracksViewController : NSTableViewDelegate, NSTableViewDataSource
 {
     func numberOfRows(in tableView: NSTableView) -> Int { return (track?.count ?? 0) }
-            
+    
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?
     {
         var cid: String = ""
@@ -148,9 +152,10 @@ extension TracksViewController : NSTableViewDelegate, NSTableViewDataSource
             else if cid == CellIdent.ISENABLED
             {
                 let c = cell as! CheckBoxTableCellView
-                
+
                 if item is AVTrackAudio || item is AVTrackVideo
                 {
+                    c.checkbox.tag = row
                     c.checkbox.isHidden = false
                     c.checkbox.intValue = item.isEnabled ? 1 : 0
                 }

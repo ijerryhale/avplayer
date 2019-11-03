@@ -24,6 +24,8 @@
 
 import Cocoa
 
+let expectedExt = ["mp4", "MP4", "mov", "MOV", "m4v", "M4V"]
+
 extension Float
 {
     func truncate(places : Int)-> Float { return Float(floor(pow(10.0, Float(places)) * self)/pow(10.0, Float(places))) }
@@ -60,11 +62,14 @@ func handleErrorWithMessage(_ message: String?, error: Error? = nil)
     NSLog("Error occured with message: \(message ?? "No Message"), error: \(String(describing: error)).")
 }
 
-let expectedExt = ["mp4", "MP4", "mov", "MOV", "m4v", "M4V"]
-
 @NSApplicationMain
 class AppDelegate: NSObject
 {
+    //  IB binds to Disable/Enable
+    //  Create Movie Clip... Menu Item
+    @objc var hasValidAsset = false
+    @objc var isLocalAsset = false
+
     //  MARK: IBAction
     @IBAction func doToggleTimeCodeDisplay(_ mi: NSMenuItem)
     {
@@ -85,10 +90,6 @@ class AppDelegate: NSObject
         let openURLController = (NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "OpenURLWindowController") as! NSWindowController)
         openURLController.window?.makeKeyAndOrderFront(nil)
     }
-
-    //  IB bind to Disable/Enable
-    //  Trimmed MOV Menu Item
-    @objc var isLocalAsset = false
 
     //  @objc func applicationDidBecomeActive() { }
 }

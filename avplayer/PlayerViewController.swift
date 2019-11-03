@@ -185,10 +185,12 @@ class PlayerViewController: NSViewController
             
             let hasValidDuration = duration.isNumeric && duration.value != 0
 
+            scrubberSlider!.resetMarkers()
+            
             scrubberSlider!.isEnabled = hasValidDuration
             scrubberSlider!.floatValue = hasValidDuration ? Float(CMTimeGetSeconds(player.currentTime())) : 0.001
             scrubberSlider!.maxValue =  hasValidDuration ? Double(CMTimeGetSeconds(duration)) : 0.001
-
+            
             frameRateText.stringValue = hasValidDuration ? frameRate.truncate(places: 3).description : ""
             
             playPauseBtn.isEnabled = hasValidDuration
@@ -242,7 +244,7 @@ class PlayerViewController: NSViewController
         scrubberSlider!.translatesAutoresizingMaskIntoConstraints = false
         scrubberSlider!.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant:SCRUBBER_LEFT_ANCHOR).isActive = true
         scrubberSlider!.widthAnchor.constraint(equalToConstant: SCRUBBER_WIDTH_ANCHOR).isActive = true
-        
+
         if USE_DEFAULT_MOV { playPauseBtn.title = "Pause"; player.play() }
         else { playPauseBtn.title = "Play" }
         
@@ -284,10 +286,6 @@ class PlayerViewController: NSViewController
         scrubberSlider!.minValue = 0.0
         scrubberSlider!.maxValue = 0.0
         
-        scrubberSlider!.markerScrub.value = 0.0
-        scrubberSlider!.markerStart.value = 0.0
-        scrubberSlider!.markerEnd.value = 0.0
-
         scrubberSlider!.select(scrubberSlider?.markerScrub)
         
         view.addSubview(scrubberSlider!)

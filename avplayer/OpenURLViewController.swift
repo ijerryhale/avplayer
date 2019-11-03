@@ -36,7 +36,7 @@ class OpenURLViewController: NSViewController
         let path = textField.stringValue
         
         if path.isValidURL
-        {            
+        {
             ////    openFile(notification: NSNotification)
             NotificationCenter.default.post(name: Notification.Name(rawValue: NOTIF_OPENFILE), object: NSURL(string: path))
 
