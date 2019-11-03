@@ -41,132 +41,131 @@ class PlayerWindowController : NSWindowController
  
     @IBAction func doCreateMovieClip(_ sender: Any)
      {
-        if let mutableAsset = self.asset as? AVMutableMovie
-        {
-            let pathExt = mutableAsset.url!.pathExtension
-            let savePanel = NSSavePanel()
-            let movDir = FileManager.default.urls(for: .moviesDirectory, in: .userDomainMask)
+        //  menu item is only enabled for local files
+        let mutableAsset = self.asset as! AVMutableMovie
+        let pathExt = mutableAsset.url!.pathExtension
+        let savePanel = NSSavePanel()
+        let movDir = FileManager.default.urls(for: .moviesDirectory, in: .userDomainMask)
 
-            savePanel.title = "Save Movie As"
-            savePanel.canCreateDirectories = false
-            
-            savePanel.allowedFileTypes = expectedExt
-            savePanel.directoryURL = movDir[0]
-            savePanel.nameFieldStringValue = "Untitled." + pathExt
-
-            savePanel.beginSheetModal(for:self.window!)
-            { (response) in
-
-                if response == .OK
-                {
-                    if let url:URL = savePanel.url
-                    {
-                        typealias TrimCompletion = (Error?) -> ()
-                        typealias TrimPoints = [(CMTime, CMTime)]
-            
-                        func createMovieClip(_ asset: AVAsset, destinationURL: URL, trimPoints: TrimPoints, completion: TrimCompletion?)
-                        {
-                            func removeFileAtURLIfExists(url: NSURL)
-                            {
-                                if let filePath = url.path
-                                {
-                                    let fileManager = FileManager.default
-            
-                                    if fileManager.fileExists(atPath: filePath)
-                                    {
-                                        do { try fileManager.removeItem(atPath: filePath) }
-                                        catch { print("createMovieClip: Couldn't remove existing destination file: \(error)") }
-                                    }
-                                }
-                            }
-                            
-                            func verifyPresetForAsset(preset: String, asset: AVAsset) -> Bool
-                            {
-                                let compatiblePresets = AVAssetExportSession.exportPresets(compatibleWith: asset)
-                                let filteredPresets = compatiblePresets.filter { $0 == preset }
-            
-                                return (filteredPresets.count > 0 || preset == AVAssetExportPresetHighestQuality)
-                            }
-            
-                            let preferredPreset = AVAssetExportPresetHighestQuality
-            
-                            if verifyPresetForAsset(preset: preferredPreset, asset: asset)
-                            {
-                                removeFileAtURLIfExists(url: destinationURL as NSURL)
-                                
-                                let movieClip = AVMutableMovie()
-                                movieClip.defaultMediaDataStorage = AVMediaDataStorage(url: destinationURL)
-                                
-                                //  now only vaguely based upon:
-                                //  https://gist.github.com/acj/b8c5f8eafe0605a38692
-                                var accumulatedTime = CMTime.zero
-                                for (startTimeForCurrentSlice, endTimeForCurrentSlice) in trimPoints
-                                {
-                                    let durationOfCurrentSlice = CMTimeSubtract(endTimeForCurrentSlice, startTimeForCurrentSlice)
-                                    let timeRangeForCurrentSlice = CMTimeRangeMake(start: startTimeForCurrentSlice, duration: durationOfCurrentSlice)
-                                    do
-                                    {
-                                        try movieClip.insertTimeRange(timeRangeForCurrentSlice, of: asset, at: accumulatedTime, copySampleData: true)
-                                    }
-                                    catch
-                                    {
-                                        let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "createMovieClip: Couldn't insert time ranges: \(error)"])
-                                        completion?(error)
-                                        return
-                                    }
-
-                                    accumulatedTime = CMTimeAdd(accumulatedTime, durationOfCurrentSlice)
-                                }
-     
-                                do
-                                {
-                                    //  case "mov":
-                                    //  case "MOV":
-                                    var fileType:AVFileType = .mov
-                                    
-                                    switch pathExt
-                                    {
-                                        case "M4V", "m4v":
-                                            fileType = .m4v
-                                        break
-                                        default:
-                                            fileType = .mp4
-                                        break
-                                    }
+        savePanel.title = "Save Movie As"
+        savePanel.canCreateDirectories = false
         
-                                    try movieClip.writeHeader(to: destinationURL, fileType: fileType, options: .addMovieHeaderToDestination)
-                                }
-                                catch
+        savePanel.allowedFileTypes = expectedExt
+        savePanel.directoryURL = movDir[0]
+        savePanel.nameFieldStringValue = "Untitled." + pathExt
+
+        savePanel.beginSheetModal(for:self.window!)
+        { (response) in
+
+            if response == .OK
+            {
+                if let url:URL = savePanel.url
+                {
+                    typealias TrimCompletion = (Error?) -> ()
+                    typealias TrimPoints = [(CMTime, CMTime)]
+        
+                    func createMovieClip(_ asset: AVAsset, destinationURL: URL, trimPoints: TrimPoints, completion: TrimCompletion?)
+                    {
+                        func removeFileAtURLIfExists(url: NSURL)
+                        {
+                            if let filePath = url.path
+                            {
+                                let fileManager = FileManager.default
+        
+                                if fileManager.fileExists(atPath: filePath)
                                 {
-                                    let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "createMovieClip: Couldn't writeHeader: \(error)"])
-                                    completion?(error)
-                                    return
+                                    do { try fileManager.removeItem(atPath: filePath) }
+                                    catch { print("createMovieClip: Couldn't remove existing destination file: \(error)") }
                                 }
                             }
                         }
                         
-                        let start:Float64 = (self.playerViewController?.scrubberSlider!.markerStart.value)!
-                        let end:Float64 = (self.playerViewController?.scrubberSlider!.markerEnd.value)!
-        
-                        if end != 0 && end != start
+                        func verifyPresetForAsset(preset: String, asset: AVAsset) -> Bool
                         {
-                            assert((mutableAsset.url!.isFileURL))
-                            assert(url.isFileURL)
-                            
-                            let trimPoints = [(CMTimeMakeWithSeconds(start, preferredTimescale: 10000), CMTimeMakeWithSeconds(end, preferredTimescale: 10000))]
+                            let compatiblePresets = AVAssetExportSession.exportPresets(compatibleWith: asset)
+                            let filteredPresets = compatiblePresets.filter { $0 == preset }
         
-                            createMovieClip(self.asset!, destinationURL: url, trimPoints: trimPoints)
-                            { error in
-                                if let error = error
-                                { handleErrorWithMessage("Failure:createClip", error: error) }
-                                else { print("Success") }
+                            return (filteredPresets.count > 0 || preset == AVAssetExportPresetHighestQuality)
+                        }
+        
+                        let preferredPreset = AVAssetExportPresetHighestQuality
+        
+                        if verifyPresetForAsset(preset: preferredPreset, asset: asset)
+                        {
+                            removeFileAtURLIfExists(url: destinationURL as NSURL)
+                            
+                            let movieClip = AVMutableMovie()
+                            movieClip.defaultMediaDataStorage = AVMediaDataStorage(url: destinationURL)
+                            
+                            //  now only vaguely based upon:
+                            //  https://gist.github.com/acj/b8c5f8eafe0605a38692
+                            var accumulatedTime = CMTime.zero
+                            for (startTimeForCurrentSlice, endTimeForCurrentSlice) in trimPoints
+                            {
+                                let durationOfCurrentSlice = CMTimeSubtract(endTimeForCurrentSlice, startTimeForCurrentSlice)
+                                let timeRangeForCurrentSlice = CMTimeRangeMake(start: startTimeForCurrentSlice, duration: durationOfCurrentSlice)
+                                do
+                                {
+                                    try movieClip.insertTimeRange(timeRangeForCurrentSlice, of: asset, at: accumulatedTime, copySampleData: true)
+                                }
+                                catch
+                                {
+                                    let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "createMovieClip: Couldn't insert time ranges: \(error)"])
+                                    completion?(error)
+                                    return
+                                }
+
+                                accumulatedTime = CMTimeAdd(accumulatedTime, durationOfCurrentSlice)
+                            }
+ 
+                            do
+                            {
+                                //  case "mov":
+                                //  case "MOV":
+                                var fileType:AVFileType = .mov
+                                
+                                switch pathExt
+                                {
+                                    case "M4V", "m4v":
+                                        fileType = .m4v
+                                    break
+                                    default:
+                                        fileType = .mp4
+                                    break
+                                }
+    
+                                try movieClip.writeHeader(to: destinationURL, fileType: fileType, options: .addMovieHeaderToDestination)
+                            }
+                            catch
+                            {
+                                let error = NSError(domain: "com.jhale.avplayer", code: -1, userInfo: [NSLocalizedDescriptionKey: "createMovieClip: Couldn't writeHeader: \(error)"])
+                                completion?(error)
+                                return
                             }
                         }
                     }
+                    
+                    let start:Float64 = (self.playerViewController?.scrubberSlider!.markerStart.value)!
+                    let end:Float64 = (self.playerViewController?.scrubberSlider!.markerEnd.value)!
+    
+                    if end != 0 && end != start
+                    {
+                        assert(mutableAsset.url!.isFileURL)
+                        assert(url.isFileURL)
+                        
+                        let trimPoints = [(CMTimeMakeWithSeconds(start, preferredTimescale: 10000), CMTimeMakeWithSeconds(end, preferredTimescale: 10000))]
+    
+                        createMovieClip(self.asset!, destinationURL: url, trimPoints: trimPoints)
+                        { error in
+                            if let error = error
+                            { handleErrorWithMessage("Failure:createClip", error: error) }
+                            else { print("Success") }
+                        }
+                    }
                 }
-                
-                savePanel.close()
             }
+            
+            savePanel.close()
         }
     }
 
