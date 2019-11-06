@@ -372,12 +372,13 @@ class PlayerWindowController : NSWindowController
         shouldCascadeWindows = true
 
         splitViewController = contentViewController as? SplitViewController
+        splitViewController?.splitView.dividerStyle = .paneSplitter
         playerViewController = splitViewController?.splitViewItems[0].viewController as? PlayerViewController
-                
+                 
         tracksViewController = NSStoryboard.tracks.instantiateController(withIdentifier: "\(TracksViewController.self)") as? TracksViewController
 
-        splitViewController?.addChild(tracksViewController!)
-
+        splitViewController?.addSplitViewItem(NSSplitViewItem(viewController: tracksViewController!))
+ 
         //  there's still bugs here if there is
         //  a pref set and the user has multiple
         //  monitors and changes the display arrangement

@@ -257,12 +257,6 @@ class PlayerViewController: NSViewController
     override func viewDidLoad()
     { super.viewDidLoad(); print("PlayerViewController viewDidLoad")
 
-        //  set up playerView Constraints
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.addConstraint(NSLayoutConstraint(item: view, attribute: .height,
-                        relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .height,
-                        multiplier: 1.0, constant: PLAYER_VIEW_HGHT / 2.0))
-        
         //  error label Constraints
         noVideoLabel.translatesAutoresizingMaskIntoConstraints = false
         unplayableLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -371,6 +365,5 @@ class PlayerViewController: NSViewController
         ////    toggleTimeCodeDisplay()
         NotificationCenter.default.addObserver(self, selector: #selector(toggleTimeCodeDisplay),
                                                name: Notification.Name(rawValue: NOTIF_TOGGLETIMECODEDISPLAY), object: nil)
-
     }
 }

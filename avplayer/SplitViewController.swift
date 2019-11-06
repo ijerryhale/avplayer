@@ -26,5 +26,9 @@ import Cocoa
 
 class SplitViewController: NSSplitViewController
 {
-
+    override func splitView(_ splitView: NSSplitView, canCollapseSubview subview: NSView) -> Bool
+    {
+        return (true)
+    }
 }
+

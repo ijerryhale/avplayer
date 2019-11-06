@@ -92,6 +92,7 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="doCreateMovieClip:" target="Ady-hI-5gd" id="c3T-Wl-RV1"/>
+                                                <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.hasValidAsset" id="oeU-Mn-DRd"/>
                                                 <binding destination="Voe-Tx-rLC" name="enabled2" keyPath="self.isLocalAsset" previousBinding="oeU-Mn-DRd" id="LuV-tL-pgv">
                                                     <dictionary key="options">
                                                         <integer key="NSMultipleValuesPlaceholder" value="-1"/>
@@ -100,7 +101,6 @@
                                                         <integer key="NSNullPlaceholder" value="-1"/>
                                                     </dictionary>
                                                 </binding>
-                                                <binding destination="Voe-Tx-rLC" name="enabled" keyPath="self.hasValidAsset" id="oeU-Mn-DRd"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Close" enabled="NO" keyEquivalent="w" id="DVo-aG-piG">

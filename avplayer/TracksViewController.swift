@@ -28,7 +28,6 @@ import AVFoundation
 class CheckBoxTableCellView : NSTableCellView
 {
     @IBOutlet weak var checkbox: NSButton!
-    
 }
 
 //    MARK: TracksViewController
@@ -111,10 +110,8 @@ class TracksViewController: NSViewController
     override func viewDidLoad()
     {
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.addConstraint(NSLayoutConstraint(item: view, attribute: .height,
-                         relatedBy: .lessThanOrEqual, toItem: nil, attribute: .height,
-                         multiplier: 1.0, constant: LOWER_VIEW_HGHT))
-        
+        view.heightAnchor.constraint(lessThanOrEqualToConstant: LOWER_VIEW_HGHT).isActive = true
+
         ////    refreshTrackData(notification: Notification)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshTrackData(_:)),
                                                name: Notification.Name(rawValue: NOTIF_NEW_ASSET), object: nil)
@@ -164,7 +161,6 @@ extension TracksViewController : NSTableViewDelegate, NSTableViewDataSource
             else if cid == CellIdent.NAME { cell.textField?.stringValue = item.trackInfo.name }
             else if cid == CellIdent.DURATION
             {
-                
                 if item is AVTrackVideo
                 {
                     let t = item as! AVTrackVideo
