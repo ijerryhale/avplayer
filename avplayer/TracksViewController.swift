@@ -126,7 +126,7 @@ extension TracksViewController : NSTableViewDelegate, NSTableViewDataSource
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView?
     {
         var cid: String = ""
-        guard let item = track?[row] else { return (nil) }
+        guard let item = track?[row] else { return (NSView()) }
 
         if tableColumn == tableView.tableColumns[0] { cid = CellIdent.ID }
         else if tableColumn == tableView.tableColumns[1] { cid = CellIdent.ISENABLED }
@@ -184,6 +184,6 @@ extension TracksViewController : NSTableViewDelegate, NSTableViewDataSource
             return (cell)
         }
     
-        return (nil)
+        return (NSView())
     }
 }
