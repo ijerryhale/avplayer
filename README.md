@@ -41,6 +41,10 @@ QuickTime Player Pro 7 stops working with Mac OS Catalina so we thought we'd hav
 
 •	Re-write video trimming function using AVMutableMovie
 
+## November 20, 2020
+
+•    Minor updates and build with XCode 12.2
+
 
 ## Contact
 

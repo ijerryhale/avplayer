@@ -3,7 +3,8 @@
     avplayer
 
     Created by Jerry Hale on 9/24/19
-    Copyright © 2019 jhale. All rights reserved
+    Copyright © 2019-2020 jhale. All rights reserved
+
  
  This file is part of avplayer.
 
